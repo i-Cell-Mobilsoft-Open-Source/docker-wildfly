@@ -1,0 +1,11 @@
+#$ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-metrics.cli
+
+# turn off metrics security (default false in microprofile)
+/subsystem=microprofile-metrics-smallrye:write-attribute(name=security-enabled, value=false)
+
+# expose subsystems to metrics endpoint
+/subsystem=microprofile-metrics-smallrye:write-attribute(name=exposed-subsystems, value=[*])
+
+# metrics prefix "wildfly_datasources_pool..."
+/subsystem=microprofile-metrics-smallrye:write-attribute(name=prefix, value=${wildfly.metrics.prefix:wildfly})
+

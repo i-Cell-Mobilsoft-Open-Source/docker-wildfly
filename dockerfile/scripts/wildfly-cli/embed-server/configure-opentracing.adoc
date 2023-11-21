@@ -1,0 +1,4 @@
+|OPENTRACING_JAEGER_AGENT_HOST |opentracing.jaeger.agent.host |localhost |Jaeger agent host
+|OPENTRACING_JAEGER_AGENT_PORT |opentracing.jaeger.agent.port |6831 |Jaeger agent port
+|OPENTRACING_JAEGER_AGENT_SAMPLER_PORT |opentracing.jaeger.agent.sampler.port |5778 |Jaeger agent sampler port
+|OPENTRACING_JAEGER_PROPAGATION |opentracing.jaeger.propagation |B3 | Opentracing propagation (uber-trace vs B3)

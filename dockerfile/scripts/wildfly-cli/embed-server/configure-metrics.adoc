@@ -1,0 +1,1 @@
+|METRICS_PREFIX |wildfly.metrics.prefix |wildfly |Wildfly metrics prefix
