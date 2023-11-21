@@ -5,12 +5,12 @@
 = Icellmobilsoft wildfly dockerimage
 
 [#index]
-== Általános
+== Common
 
-A repository az icellmobilsoft-ban használt wildfly docker image-k gyűjtését szolgálja,
-hogy azonos alapon működjenek a projektek és azok buildjei.
+The repository is a collection of wildfly docker images used in icellmobilsoft,
+to keep projects and their builds on the same basis.
 
-A projekt több részre osztható, egymást kiegészítik.
+The project can be divided into several parts, completing each other.
 
 include::architecture.adoc[leveloffset=+1]
 

@@ -27,40 +27,41 @@ A Docker imagek a következő komponenseket tartalmazzák:
 |1.0.x   |Jakarta EE 10  |Widlfy 27.0.1.Final
 |===
 
-A repository az icellmobilsoft-ban használt wildfly docker image-k gyűjtését szolgálja,
-hogy azonos alapon működjenek a projektek és azok buildjei. 
+The repository is a collection of wildfly docker images used in icellmobilsoft,
+to keep projects and their builds on the same basis.
 
-A projekt részeit több részre osztható,
-egymást kiegészítik.
+The project can be divided into several parts, completing each other.
 
-== Projekt struktúra
+== Projekt structure
 
 === /dockerfile
-Maga a dockerfile-ok gyűjtője.
-Részletes leírása a létrehozott docker image-ről a FIXME[Docker Wildfly Images] címen olvasható.
+Collection of the dockerfiles.
+For a detailed description of the docker image created, see FIXME[Docker Wildfly Images].
 
 === /script
-Általános scriptek, melyeket a dockerimage-k is felhasználnak,
-de használhatóak önmagukban is.
+Common scripts that are also used by dockerimages,
+but can also be used on their own.
 
-== Fejlesztés
-Mindent amit ehhez tudni kell az a következő parancs:
+== Development
+All you need to know is the following command:
 
 [source,bash]
 ----
-docker-compose -f <PATH>/docker-base/docker-compose.yml build
+docker-compose -f <PATH>/docker-base/docker-compose-1.yml build
+docker-compose -f <PATH>/docker-base/docker-compose-2.yml build
+docker-compose -f <PATH>/docker-base/docker-compose-3.yml build
 ----
 [IMPORTANT]
 ====
-A release és docker push parancsot kizárólag a Github Actions-re kell bízni! 
+The release and docker push commands MUST be handled exclusively by Github Actions! 
 ====
 
 == Release
-A release készítése Github Actions végzi.
-Alapvetően 2 esetet kezelünk:
+The release is done by Github Actions.
+Basically we handle 2 cases:
 
-. *Major, Minor verzió* - fő verzió release, csak a *master branchből* keletkezhet.
-. *Bugfix verzió* - csak *release branchből* keletkezhet.
+. *Major, Minor version* - major version release, can only be generated from *master branch*.
+. *Bugfix version* - can only be generated from *release branch*.
 
-A hozzátartozó CI csak a megfelelő brancheknél jelenik meg.
+The associated CI appears only for the corresponding branches.
 

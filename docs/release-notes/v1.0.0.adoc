@@ -1,11 +1,11 @@
 = v1.0.0
 
-A projekt kiköltözött a belső repositoryból,
-frissítéseket nem számolva 1:1 kompatibilis az 1.3.0 verzióval.
+The project has moved out of the internal repository,
+not counting updates, it is 1:1 compatible with version 1.3.0.
 
-.Változások a belső verzióhoz képest
+.Changes compared to the internal version
 
-* Dockerimage átnevezés:
+* Renames:
 ** if any...
 
-.Újdonságok
+.What's new
