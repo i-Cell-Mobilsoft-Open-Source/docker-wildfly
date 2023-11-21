@@ -1,0 +1,62 @@
+# Start embedded server
+# embed-server --server-config=standalone-full.xml --std-out=echo
+
+embed-server --std-out=echo
+ 
+# Start batching commands
+#####EE configs#####
+run-batch --file=${TMP_DIR}/embed-server/configure-managed-executor.cli
+run-batch --file=${TMP_DIR}/embed-server/configure-undertow.cli
+
+#####Microprofile configs#####
+run-batch --file=${TMP_DIR}/embed-server/configure-opentracing.cli
+
+#NOTE test flow if (outcome!=success) of /extension=org.wildfly.extension.microprofile.metrics-smallrye:add
+# add smallrye extension with exception handling
+try
+/extension=org.wildfly.extension.microprofile.metrics-smallrye:add
+/subsystem=microprofile-metrics-smallrye:add
+catch
+echo "Metrics extension already activated."
+finally
+end-try
+
+#metrics config
+run-batch --file=${TMP_DIR}/embed-server/configure-metrics.cli
+
+# add openapi with exception handling
+try
+/extension=org.wildfly.extension.microprofile.openapi-smallrye:add
+/subsystem=microprofile-openapi-smallrye:add
+catch
+echo "Openapi extension already activated."
+finally
+end-try
+
+# add health extension with exception handling
+try
+/extension=org.wildfly.extension.microprofile.health-smallrye:add
+/subsystem=microprofile-health-smallrye:add(security-enabled=false, empty-liveness-checks-status="${env.HEALTH_EMPTY_LIVENESS_CHECKS_STATUS:UP}", empty-readiness-checks-status="${env.HEALTH_EMPTY_READINESS_CHECKS_STATUS:UP}", empty-startup-checks-status="${env.HEALTH_EMPTY_STARTUP_CHECKS_STATUS:UP}")
+catch
+echo "Health extension already activated."
+finally
+end-try
+
+# add reactive-messaging extension with exception handling
+try
+run-batch --file=${TMP_DIR}/embed-server/configure-reactive-messaging.cli
+catch
+echo "Reactive messaging extension already activated."
+finally
+end-try
+
+# remove jmx subsystem
+try
+/subsystem=jmx:remove
+catch
+echo "Could not remove JMX subsystem"
+finally
+end-try
+
+# Stop embedded server
+stop-embedded-server
