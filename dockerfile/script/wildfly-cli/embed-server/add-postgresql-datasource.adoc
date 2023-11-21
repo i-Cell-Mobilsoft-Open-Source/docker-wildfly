@@ -1,0 +1,6 @@
+|POSTGRESQL_DS_CONNECTION_URL |postgresql.ds.connection.url |- |PostgreSQL DB connection url
+|POSTGRESQL_DS_USERNAME |postgresql.ds.username |- |PostgreSQL DB connection user
+|POSTGRESQL_DS_PASSWORD |postgresql.ds.password |- |PostgreSQL DB connection password
+|POSTGRESQL_DS_NEW_CONNECTION_SQL |postgresql.ds.new-connection-sql |BEGIN;END; |PostgreSQL DB new connection sql
+|POSTGRESQL_DS_MIN_POOL_SIZE |postgresql.ds.min-pool-size |1 |PostgreSQL DB connection min pool size
+|POSTGRESQL_DS_MAX_POOL_SIZE |postgresql.ds.max-pool-size |60 |PostgreSQL DB connection max pool size

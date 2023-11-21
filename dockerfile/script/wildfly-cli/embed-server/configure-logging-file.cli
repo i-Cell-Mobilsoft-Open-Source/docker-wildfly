@@ -1,0 +1,9 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-logging-file.cli
+# configure logging with 50MB file logs
+
+# __don't use__ space at '=' sign!
+set fileLoggingEnabled=\${env.FILE_LOGGING_ENABLED,file.logging.enabled:true}
+
+# change the default "periodic-rotating-file-handler"-t to the sliced "periodic-size-rotating-file-handler"
+/subsystem=logging/periodic-size-rotating-file-handler=FILE-50M:add(enabled=$fileLoggingEnabled, append=true, autoflush=true, file={path=service.log, relative-to=jboss.server.log.dir}, named-formatter=PATTERN, rotate-size=50M, suffix=.yyy-MM-dd, max-backup-index=50)
+/subsystem=logging/root-logger=ROOT:add-handler(name=FILE-50M)

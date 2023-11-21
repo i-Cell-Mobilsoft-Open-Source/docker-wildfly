@@ -1,0 +1,7 @@
+|LOGSTASH_ENABLED |logstash.enabled |true | Logstash szerverre logok küldés engedélyezése
+|LOGSTASH_HOST |logstash.host |127.0.0.1 | Logstash szerver host
+|LOGSTASH_PORT |logstash.port |8000 | Logstash szerver port
+|LOGSTASH_MODULE_ID |- |unknown |Logstash logging additionalFields `moduleId` kulcsnak beállítása
+|LOGSTASH_MODULE_VERSION |- |unknown |Logstash logging additionalFields `moduleVersion` kulcsnak beállítása
+|LOGSTASH_K8S_NAMESPACE |- |unknown |Logstash logging additionalFields `K8S_NAMESPACE` beállítása
+|LOGSTASH_MDC_FIELDS |- |- |Logstash logging additionalFields további kulcsok beállítási lehetősége

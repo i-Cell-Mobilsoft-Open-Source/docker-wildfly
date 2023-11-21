@@ -1,0 +1,35 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=add-postgresql-datasource.cli
+# configuring service datasource
+
+# Start batching commands
+
+# Properties
+#set dsName=${postgresql.ds.service.name}DS
+set dsName=icellmobilsoftDS
+set dsConnectionUrl=\${env.POSTGRESQL_DS_CONNECTION_URL,postgresql.ds.connection.url}
+set dsUsername=\${env.POSTGRESQL_DS_USERNAME,postgresql.ds.username}
+set dsPassword=\${env.POSTGRESQL_DS_PASSWORD,postgresql.ds.password}
+set dsNewConnectionSql=\${env.POSTGRESQL_DS_NEW_CONNECTION_SQL,postgresql.ds.new-connection-sql:BEGIN;END;}
+set dsMinPoolSize=\${env.POSTGRESQL_DS_MIN_POOL_SIZE,postgresql.ds.min-pool-size:1}
+set dsMaxPoolSize=\${env.POSTGRESQL_DS_MAX_POOL_SIZE,postgresql.ds.max-pool-size:60}
+
+/subsystem=datasources/data-source=$dsName:add( \
+    enabled=true, \
+    driver-name=postgresql, \
+    connection-url=$dsConnectionUrl, \
+    jndi-name=java:jboss/datasources/$dsName, \
+    user-name=$dsUsername, \
+    password=$dsPassword, \
+#    security-domain=encrypted-ds, \
+    min-pool-size=$dsMinPoolSize, \
+    max-pool-size=$dsMaxPoolSize, \
+    check-valid-connection-sql="SELECT 1", \
+    new-connection-sql=$dsNewConnectionSql, \
+    valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker, \
+    validate-on-match=true, \
+    background-validation=false, \
+    exception-sorter-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter, \
+    blocking-timeout-wait-millis=5000, \
+    idle-timeout-minutes=5, \
+    share-prepared-statements=false, \
+    statistics-enabled=true)

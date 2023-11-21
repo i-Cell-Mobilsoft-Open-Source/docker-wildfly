@@ -1,0 +1,4 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=add-oracle-driver.cli
+# set up the oracle driver
+
+/subsystem=datasources/jdbc-driver=oracle:add(driver-module-name=com.oracle.ojdbc, driver-class-name=oracle.jdbc.OracleDriver)
