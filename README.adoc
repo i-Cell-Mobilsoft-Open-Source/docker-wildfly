@@ -23,7 +23,6 @@ The docker images contain the following components:
 |===
 |Version  |Jakarta EE |Wildfly
 //----------------------
-|0.8.x   |Jakarta EE 8   |Widlfy 26.1.1.Final (AKARJUK?)
 |1.0.x   |Jakarta EE 10  |Widlfy 27.0.1.Final
 |===
 

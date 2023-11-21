@@ -1,1 +1,1 @@
-|MANAGED_EXECUTOR_SERVICE_CORE_THREADS |managed-executor-service.core-thread |16 | Wildfly managed executor maximális száma (egyébként cpu szerint lenne dinamikus 2x)
+|MANAGED_EXECUTOR_SERVICE_CORE_THREADS |managed-executor-service.core-thread |16 | Maximum number of Wildfly managed executors. (If it was not configured, t would be dynamic - [number of cpu cores] x 2)   
