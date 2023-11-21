@@ -1,1 +1,0 @@
-module add --name=com.oracle.ojdbc --resource-delimiter=, --resources=${ORACLE_JDBC_RESOURCES} --dependencies=jakarta.transaction.api

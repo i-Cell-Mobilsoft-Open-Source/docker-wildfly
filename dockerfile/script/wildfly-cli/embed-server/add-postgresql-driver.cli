@@ -1,4 +1,0 @@
-# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=add-postgresql-driver.cli
-# set up the postgresql driver
-
-/subsystem=datasources/jdbc-driver=postgresql:add(driver-module-name=org.postgresql.jdbc, driver-class-name=org.postgresql.Driver)

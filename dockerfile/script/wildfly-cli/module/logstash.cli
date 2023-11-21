@@ -1,1 +1,0 @@
-module add --name=biz.paluch.logging --resource-delimiter=, --resources=${LOGSTASH_RESOURCES} --dependencies=org.jboss.logmanager

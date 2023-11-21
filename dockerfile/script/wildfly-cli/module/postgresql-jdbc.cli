@@ -1,1 +1,0 @@
-module add --name=org.postgresql.jdbc --resource-delimiter=, --resources=${POSTGRESQL_JDBC_RESOURCES} --dependencies=jakarta.transaction.api

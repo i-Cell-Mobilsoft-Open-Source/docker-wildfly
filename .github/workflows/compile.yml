@@ -16,14 +16,3 @@ jobs:
         run: |
           docker compose -f ./docker-compose-1.yml build --no-cache
           docker compose -f ./docker-compose-2.yml build --no-cache
-
-          docker compose -f ./docker-compose-3.yml build wildfly-logstash-release --no-cache
-          docker compose -f ./docker-compose-3.yml build wildfly-jpa-logstash-release --no-cache 
-          docker compose -f ./docker-compose-3.yml build wildfly-full-logstash-release --no-cache
-
-          docker compose -f ./docker-compose-3.yml build wildfly-oracle-jdbc-release --no-cache
-          docker compose -f ./docker-compose-3.yml build wildfly-full-oracle-jdbc-release --no-cache
-          docker compose -f ./docker-compose-3.yml build wildfly-postgresql-jdbc-release --no-cache
-          docker compose -f ./docker-compose-3.yml build wildfly-full-postgresql-jdbc-release --no-cache
-
-          docker compose -f ./docker-compose-3.yml build wildfly-full-oracle-jdbc-ibm-mq-release --no-cache

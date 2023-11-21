@@ -1,1 +1,0 @@
-|FILE_LOGGING_ENABLED |file.logging.enabled |true | File loggolás engedélyezése. Alapértelmezetten 50MB méret szerint darabolja a default Wildfly loggolási könyvtárba

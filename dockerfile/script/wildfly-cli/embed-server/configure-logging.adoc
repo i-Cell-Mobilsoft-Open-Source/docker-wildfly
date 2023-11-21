@@ -1,5 +1,0 @@
-|CONSOLE_LOGGING_ENABLED                   |console.logging.enabled                   |true |Konzol loggolás engedélyezése
-|LOGGING_COFFEE_ETCD_LOGGER_LOGLEVEL       |logging.coffee.etcd.logger.loglevel       |INFO |ETCD kapcsolatos loggolási szint
-|LOGGING_HU_ICELLMOBILSOFT_LOGGER_LOGLEVEL |logging.hu.icellmobilsoft.logger.loglevel |ALL  |"hu.icellmobilsoft" globális loggolási szint
-|LOGGING_ROOT_LOGGER_LOGLEVEL              |logging.root.logger.loglevel              |INFO |globális loggolási szint
-|LOGGING_K8S_NAMESPACE                     |-                                         |-    |Log sorban szereplő `k8s_namespace` kulcs értéke (log pattern)
