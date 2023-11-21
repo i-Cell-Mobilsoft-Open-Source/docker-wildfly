@@ -79,7 +79,7 @@ jobs:
         with:
           set: |
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
-          push: true
+          #push: true
           files: |
             docker-compose-1.yml
           targets: wildfly-ms-release,wildfly-jpa-release,wildfly-full-release
