@@ -1,0 +1,66 @@
+:toc: left
+:toclevels: 4
+:sectnums:
+
+= docker-wildfly images
+
+A repository az icellmobilsoft-ban használt Wildfly docker image-k gyűjtését szolgálja,
+hogy azonos alapon működjenek a projektek és azok buildjei. 
+
+A projekt részei több részre oszthatóak, egymást kiegészítik.
+
+[IMPORTANT]
+====
+A Docker imagek a következő komponenseket tartalmazzák:
+
+* Wildfly: 27.x (Jakarta EE10)
+* Java: 17.x
+* Base image version: 1.3.x FIXME:1.4.x
+====
+
+.Kompatibilitás
+[options="header"]
+|===
+|Verzió  |Jakarta EE |Wildfly
+//----------------------
+|0.8.x   |Jakarta EE 8   |Widlfy 26.1.1.Final (AKARJUK?)
+|1.0.x   |Jakarta EE 10  |Widlfy 27.0.1.Final
+|===
+
+A repository az icellmobilsoft-ban használt wildfly docker image-k gyűjtését szolgálja,
+hogy azonos alapon működjenek a projektek és azok buildjei. 
+
+A projekt részeit több részre osztható,
+egymást kiegészítik.
+
+== Projekt struktúra
+
+=== /dockerfile
+Maga a dockerfile-ok gyűjtője.
+Részletes leírása a létrehozott docker image-ről a FIXME[Docker Wildfly Images] címen olvasható.
+
+=== /script
+Általános scriptek, melyeket a dockerimage-k is felhasználnak,
+de használhatóak önmagukban is.
+
+== Fejlesztés
+Mindent amit ehhez tudni kell az a következő parancs:
+
+[source,bash]
+----
+docker-compose -f <PATH>/docker-base/docker-compose.yml build
+----
+[IMPORTANT]
+====
+A release és docker push parancsot kizárólag a Github Actions-re kell bízni! 
+====
+
+== Release
+A release készítése Github Actions végzi.
+Alapvetően 2 esetet kezelünk:
+
+. *Major, Minor verzió* - fő verzió release, csak a *master branchből* keletkezhet.
+. *Bugfix verzió* - csak *release branchből* keletkezhet.
+
+A hozzátartozó CI csak a megfelelő brancheknél jelenik meg.
+

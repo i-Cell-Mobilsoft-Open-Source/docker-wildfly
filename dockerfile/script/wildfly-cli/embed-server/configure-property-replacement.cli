@@ -1,0 +1,6 @@
+#$ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-property-replacement
+
+#property replacement in the ee subsystem
+set propertyReplacementValue=\${env.SPEC_DESCRIPTOR_PROPERTY_REPLACEMENT,spec-descriptor.property-replacement:true}
+
+/subsystem=ee:write-attribute(name="spec-descriptor-property-replacement",value=$propertyReplacementValue)

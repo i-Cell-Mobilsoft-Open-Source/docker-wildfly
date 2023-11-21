@@ -1,0 +1,19 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-opentracing.cli
+# opentracing configuration
+
+# __don't use__ space at '=' sign!
+set jaegerHost=\${env.OPENTRACING_JAEGER_AGENT_HOST,opentracing.jaeger.agent.host:localhost}
+set jaegerPort=\${env.OPENTRACING_JAEGER_AGENT_PORT,opentracing.jaeger.agent.port:6831}
+set jaegerSamplerPort=\${env.OPENTRACING_JAEGER_AGENT_SAMPLER_PORT,opentracing.jaeger.agent.sampler.port:5778}
+set jaegerPropagation=\${env.OPENTRACING_JAEGER_PROPAGATION,opentracing.jaeger.propagation:B3}
+
+# UDP
+# define an outbound socket binding towards the Jaeger tracer.
+/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=jaeger:add(host=$jaegerHost, port=$jaegerPort)
+
+# define our MPOT tracer configuration:
+/subsystem=microprofile-opentracing-smallrye/jaeger-tracer=jaeger-opentrace:add(propagation=[$jaegerPropagation], sampler-type=remote, sampler-manager-host-port=$jaegerHost:$jaegerSamplerPort, reporter-log-spans=true, sender-binding=jaeger)
+
+# define this new tracer as the default tracer to be used by WildFly
+/subsystem=microprofile-opentracing-smallrye:write-attribute(name=default-tracer, value=jaeger-opentrace)
+

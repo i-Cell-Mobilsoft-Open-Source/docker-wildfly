@@ -1,0 +1,22 @@
+:toc: left
+:toclevels: 4
+:sectnums:
+
+= Icellmobilsoft wildfly dockerimage
+
+[#index]
+== Általános
+
+A repository az icellmobilsoft-ban használt wildfly docker image-k gyűjtését szolgálja,
+hogy azonos alapon működjenek a projektek és azok buildjei.
+
+A projekt több részre osztható, egymást kiegészítik.
+
+include::architecture.adoc[leveloffset=+1]
+
+include::project-structure.adoc[leveloffset=+1]
+
+[#release-notes]
+== Release notes
+
+include::release-notes/v1.0.0.adoc[leveloffset=+2]

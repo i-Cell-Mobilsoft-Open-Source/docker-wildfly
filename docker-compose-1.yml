@@ -1,0 +1,43 @@
+version: "3.8"
+
+# START build
+# galleon needs DOCKER_BUILDKIT as well 
+# DOCKER_BUILDKIT=1 docker compose -f docker-compose-1.yml build --no-cache
+# run something inside the image
+# docker run --rm -it dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms /bin/bash
+# start
+# docker run --rm dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms
+# check labels
+# docker inspect dockerhub-dockerio.icellmobilsoft.hu/wildfly/oracle-jdbc:1.0.0 | jq -r '.[0].Config.Labels'
+services:
+  # Starting point common/Dockerfile 
+  wildfly-ms-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/common/Dockerfile
+      args:
+        BASE_IMAGE: $BASE_IMAGE
+        WILDFLY_VERSION: $WILDFLY_VERSION
+        DOCKER_IMAGE_GALLEON: $DOCKER_IMAGE_GALLEON
+        GALLEON_LAYERS: $GALLEON_LAYERS_MICROSERVICE
+    image: $DOCKER_IMAGE_WF_MS
+  wildfly-jpa-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/common/Dockerfile
+      args:
+        BASE_IMAGE: $BASE_IMAGE
+        WILDFLY_VERSION: $WILDFLY_VERSION
+        DOCKER_IMAGE_GALLEON: $DOCKER_IMAGE_GALLEON
+        GALLEON_LAYERS: $GALLEON_LAYERS_JPA
+    image: $DOCKER_IMAGE_WF_MS_JPA
+  wildfly-full-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/common/Dockerfile
+      args:
+        BASE_IMAGE: $BASE_IMAGE
+        WILDFLY_VERSION: $WILDFLY_VERSION
+        DOCKER_IMAGE_GALLEON: $DOCKER_IMAGE_GALLEON
+        GALLEON_LAYERS: full
+    image: $DOCKER_IMAGE_WF_FULL

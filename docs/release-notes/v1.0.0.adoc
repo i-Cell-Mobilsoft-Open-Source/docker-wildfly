@@ -1,0 +1,11 @@
+= v1.0.0
+
+A projekt kiköltözött a belső repositoryból,
+frissítéseket nem számolva 1:1 kompatibilis az 1.3.0 verzióval.
+
+.Változások a belső verzióhoz képest
+
+* Dockerimage átnevezés:
+** if any...
+
+.Újdonságok
