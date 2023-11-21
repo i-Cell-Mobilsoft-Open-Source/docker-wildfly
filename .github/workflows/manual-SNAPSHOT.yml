@@ -32,8 +32,8 @@ jobs:
 # pre release
 ###############
       - name: Import GPG key
-        # GPG privat kulcs, ami armor-al exportalva (kezdete: '-----BEGIN PGP PRIVATE KEY BLOCK-----') ez az egesz tartalom base64 elkodolva, az betoltve a secrets tartalomnak
-        # dekodoljuk a base64 elkodolt privat kulcsot es betoltjuk
+        # GPG private key exported by armor (begins with: '-----BEGIN PGP PRIVATE KEY BLOCK-----') the whole content encoded with base64, and loaded in the content of the secret
+        # Decode and load the base64 encoded private key
         run: |
           mkdir -p ~/.gnupg/
           echo "${{ secrets.GPG_SIGNING_KEY_GITHUB_TECHUSER }}" | base64 --decode > ~/.gnupg/private.key
@@ -41,7 +41,7 @@ jobs:
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
-          # A tartalma egy PEM formatumos (kezdete: '-----BEGIN RSA PRIVATE KEY-----') SSH kulcs
+          # Content is in PEM format (begins with: '-----BEGIN RSA PRIVATE KEY-----') SSH key
           key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB_TECHUSER }}
           name: id_rsa # optional
           known_hosts: ${{ secrets.KNOWN_HOSTS }} # jelenleg ures a tartalma
@@ -90,8 +90,8 @@ jobs:
 #            *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
 #          push: true
 #          files: |
-#            docker-compose.yml
-#          targets: curl-release,alpine-runner-release
+#            docker-compose-2.yml
+#          targets: wildfly-ms-microprofile-release,wildfly-ms-jpa-microprofile-release,wildfly-full-microprofile-release
 #      - name: docker buildx bake "#3"
 #        uses: docker/bake-action@v4
 #        with:
@@ -99,8 +99,8 @@ jobs:
 #            *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
 #          push: true
 #          files: |
-#            docker-compose.yml
-#          targets: nexus-download-builder,java11jre-release,java17jre-release,java21jre-release
+#            docker-compose-3.yml
+#          targets: wildfly-logstash-release,wildfly-jpa-logstash-release,wildfly-full-logstash-release 
 #      - name: docker buildx bake "#4"
 #        uses: docker/bake-action@v4
 #        with:
@@ -108,8 +108,8 @@ jobs:
 #            *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
 #          push: true
 #          files: |
-#            docker-compose.yml
-#          targets: java11-maven-builder,java17-maven-builder,java21-maven-builder
+#            docker-compose-3.yml
+#          targets: wildfly-oracle-jdbc-release,wildfly-full-oracle-jdbc-release,wildfly-postgresql-jdbc-release,wildfly-full-postgresql-jdbc-release
 #      - name: docker buildx bake "#5"
 #        uses: docker/bake-action@v4
 #        with:
@@ -117,5 +117,5 @@ jobs:
 #            *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
 #          push: true
 #          files: |
-#            docker-compose.yml
-#          targets: java11-galleon-builder,java17-galleon-builder,java21-galleon-builder
+#            docker-compose-3.yml
+#          targets: wildfly-full-oracle-jdbc-ibm-mq-release 

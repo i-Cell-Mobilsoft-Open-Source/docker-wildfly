@@ -1,0 +1,35 @@
+version: "3.8"
+
+# START build
+# galleon needs DOCKER_BUILDKIT as well 
+# DOCKER_BUILDKIT=1 docker compose -f docker-compose-2.yml build --no-cache
+# run something inside the image
+# docker run --rm -it dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms /bin/bash
+# start
+# docker run --rm dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms
+# check labels
+# docker inspect dockerhub-dockerio.icellmobilsoft.hu/wildfly/oracle-jdbc:1.0.0 | jq -r '.[0].Config.Labels'
+
+services:
+  # Starting point common/Dockerfile 
+  wildfly-ms-microprofile-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/microprofile/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS
+    image: $DOCKER_IMAGE_WF_MS_MP
+  wildfly-ms-jpa-microprofile-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/microprofile/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA
+    image: $DOCKER_IMAGE_WF_MS_JPA_MP
+  wildfly-full-microprofile-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/microprofile/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL
+    image: $DOCKER_IMAGE_WF_FULL_MP

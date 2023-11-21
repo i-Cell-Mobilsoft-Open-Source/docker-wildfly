@@ -1,0 +1,138 @@
+version: "3.8"
+
+# START build
+# BUILDKIT_PROGRESS=plain docker compose -f docker-compose-3.yml build --no-cache
+# run something inside the image
+# docker run --rm -it dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms /bin/bash
+# start
+# docker run --rm dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms
+# check labels
+# docker inspect dockerhub-dockerio.icellmobilsoft.hu/wildfly/oracle-jdbc:1.0.0 | jq -r '.[0].Config.Labels'
+
+services:
+  #############################################################################
+  # prerequisities: targets in docker-compose-2.yml must be built!
+  #############################################################################
+  # logstash 
+  wildfly-logstash-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/logstash/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_MP
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
+        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
+        POM_VERSION: $LOGSTASH_POM_VERSION
+        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_LOGSTASH
+  wildfly-jpa-logstash-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/logstash/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA_MP
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
+        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
+        POM_VERSION: $LOGSTASH_POM_VERSION
+        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_JPA_LOGSTASH
+  wildfly-full-logstash-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/logstash/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_MP
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
+        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
+        POM_VERSION: $LOGSTASH_POM_VERSION
+        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_FULL_LOGSTASH
+  # oracle-jdbc
+  wildfly-oracle-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/oracle-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_JPA_LOGSTASH
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_OJDBC_GROUP_ID: $ORACLE_OJDBC11_POM_GROUP_ID
+        POM_OJDBC_ARTIFACT_ID: $ORACLE_OJDBC11_ARTIFACT_ID
+        POM_OJDBC_VERSION: $ORACLE_OJDBC11_VERSION
+        POM_OJDBC_EXTENSION: $ORACLE_OJDBC11_EXTENSION
+        POM_ORAI18N_GROUP_ID: $ORACLE_ORAI18N_POM_GROUP_ID
+        POM_ORAI18N_ARTIFACT_ID: $ORACLE_ORAI18N_ARTIFACT_ID
+        POM_ORAI18N_VERSION: $ORACLE_ORAI18N_VERSION
+        POM_ORAI18N_EXTENSION: $ORACLE_ORAI18N_EXTENSION
+    image: $DOCKER_IMAGE_WF_ORACLE_JDBC
+    depends_on:
+      wildfly-jpa-logstash-release: 
+        condition: service_completed_successfully
+  wildfly-full-oracle-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/oracle-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_LOGSTASH
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_OJDBC_GROUP_ID: $ORACLE_OJDBC11_POM_GROUP_ID
+        POM_OJDBC_ARTIFACT_ID: $ORACLE_OJDBC11_ARTIFACT_ID
+        POM_OJDBC_VERSION: $ORACLE_OJDBC11_VERSION
+        POM_OJDBC_EXTENSION: $ORACLE_OJDBC11_EXTENSION
+        POM_ORAI18N_GROUP_ID: $ORACLE_ORAI18N_POM_GROUP_ID
+        POM_ORAI18N_ARTIFACT_ID: $ORACLE_ORAI18N_ARTIFACT_ID
+        POM_ORAI18N_VERSION: $ORACLE_ORAI18N_VERSION
+        POM_ORAI18N_EXTENSION: $ORACLE_ORAI18N_EXTENSION
+    image: $DOCKER_IMAGE_WF_FULL_ORACLE_JDBC
+    depends_on:
+      wildfly-full-logstash-release: 
+        condition: service_completed_successfully
+  # postgresql-jdbc
+  wildfly-postgresql-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/postgresql-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_JPA_LOGSTASH
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $POSTGRES_JDBC_POM_GROUP_ID
+        POM_ARTIFACT_ID: $POSTGRES_JDBC_POM_ARTIFACT_ID
+        POM_VERSION: $POSTGRES_JDBC_POM_VERSION
+        POM_EXTENSION: $POSTGRES_JDBC_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_POSTGRESQL_JDBC
+    depends_on:
+      wildfly-jpa-logstash-release: 
+        condition: service_completed_successfully
+  wildfly-full-postgresql-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/postgresql-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_LOGSTASH
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $POSTGRES_JDBC_POM_GROUP_ID
+        POM_ARTIFACT_ID: $POSTGRES_JDBC_POM_ARTIFACT_ID
+        POM_VERSION: $POSTGRES_JDBC_POM_VERSION
+        POM_EXTENSION: $POSTGRES_JDBC_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_FULL_POSTGRESQL_JDBC
+    depends_on:
+      wildfly-full-logstash-release: 
+        condition: service_completed_successfully
+  # ibm-mq 
+  wildfly-full-oracle-jdbc-ibm-mq-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/ibm-mq/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_ORACLE_JDBC
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $IBM_MQ_POM_GROUP_ID
+        POM_ARTIFACT_ID: $IBM_MQ_POM_ARTIFACT_ID
+        POM_VERSION: $IBM_MQ_POM_VERSION
+        POM_EXTENSION: $IBM_MQ_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_FULL_ORACLE_JDBC_IBM_MQ
+    depends_on:
+      wildfly-full-oracle-jdbc-release: 
+        condition: service_completed_successfully
