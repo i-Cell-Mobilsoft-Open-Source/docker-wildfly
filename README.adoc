@@ -2,26 +2,26 @@
 :toclevels: 4
 :sectnums:
 
-= docker-wildfly images
+= The docker-wildfly images
 
-A repository az icellmobilsoft-ban használt Wildfly docker image-k gyűjtését szolgálja,
-hogy azonos alapon működjenek a projektek és azok buildjei. 
+The repository is a collection of wildfly docker images used in icellmobilsoft,
+to keep projects and their builds on the same basis.
 
-A projekt részei több részre oszthatóak, egymást kiegészítik.
+The project can be divided into several parts, completing each other.
 
 [IMPORTANT]
 ====
-A Docker imagek a következő komponenseket tartalmazzák:
+The docker images contain the following components:
 
 * Wildfly: 27.x (Jakarta EE10)
 * Java: 17.x
 * Base image version: 1.3.x FIXME:1.4.x
 ====
 
-.Kompatibilitás
+.Compatibility
 [options="header"]
 |===
-|Verzió  |Jakarta EE |Wildfly
+|Version  |Jakarta EE |Wildfly
 //----------------------
 |0.8.x   |Jakarta EE 8   |Widlfy 26.1.1.Final (AKARJUK?)
 |1.0.x   |Jakarta EE 10  |Widlfy 27.0.1.Final
