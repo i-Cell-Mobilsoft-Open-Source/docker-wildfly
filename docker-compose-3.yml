@@ -55,7 +55,7 @@ services:
       context: .
       dockerfile: dockerfile/wildfly/oracle-jdbc/Dockerfile
       args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_JPA_LOGSTASH
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA_MP
         ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
         POM_OJDBC_GROUP_ID: $ORACLE_OJDBC11_POM_GROUP_ID
         POM_OJDBC_ARTIFACT_ID: $ORACLE_OJDBC11_ARTIFACT_ID
@@ -74,7 +74,7 @@ services:
       context: .
       dockerfile: dockerfile/wildfly/oracle-jdbc/Dockerfile
       args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_LOGSTASH
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_MP
         ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
         POM_OJDBC_GROUP_ID: $ORACLE_OJDBC11_POM_GROUP_ID
         POM_OJDBC_ARTIFACT_ID: $ORACLE_OJDBC11_ARTIFACT_ID
@@ -94,7 +94,7 @@ services:
       context: .
       dockerfile: dockerfile/wildfly/postgresql-jdbc/Dockerfile
       args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_JPA_LOGSTASH
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA
         ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
         POM_GROUP_ID: $POSTGRES_JDBC_POM_GROUP_ID
         POM_ARTIFACT_ID: $POSTGRES_JDBC_POM_ARTIFACT_ID
@@ -109,7 +109,7 @@ services:
       context: .
       dockerfile: dockerfile/wildfly/postgresql-jdbc/Dockerfile
       args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_LOGSTASH
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_MP
         ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
         POM_GROUP_ID: $POSTGRES_JDBC_POM_GROUP_ID
         POM_ARTIFACT_ID: $POSTGRES_JDBC_POM_ARTIFACT_ID
