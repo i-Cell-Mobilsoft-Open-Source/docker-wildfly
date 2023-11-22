@@ -6,6 +6,11 @@ not counting updates, it is 1:1 compatible with version 1.3.0.
 .Changes compared to the internal version
 
 * Renames:
-** if any...
+** wildfly-ms/default -> icellmobilsoft/wildfly-default-ms
+** wildfly-jpa/default -> icellmobilsoft/wildfly-default-jpa
+** wildfly-full/default -> icellmobilsoft/wildfly-default-full
+** wildfly-ms/mp -> icellmobilsoft/wildfly-mp-ms
+** wildfly-ms/jpa/mp -> icellmobilsoft/wildfly-mp-jpa
+** wildfly-full/mp -> icellmobilsoft/wildfly-mp-full
 
 .What's new
