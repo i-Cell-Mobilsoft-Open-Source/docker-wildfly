@@ -31,7 +31,7 @@ to keep projects and their builds on the same basis.
 
 The project can be divided into several parts, completing each other.
 
-== Projekt structure
+== Project structure
 
 === /dockerfile
 Collection of the dockerfiles.
