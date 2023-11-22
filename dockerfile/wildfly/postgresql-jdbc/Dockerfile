@@ -1,3 +1,4 @@
+# coming from docker-compose
 ARG BASE_IMAGE
 ARG ARTIFACT_DOWNLOADER_IMAGE
 

@@ -1,3 +1,4 @@
+# coming from docker-compose
 ARG BASE_IMAGE
 ARG DOCKER_IMAGE_GALLEON
 ARG GALLEON_LAYERS
