@@ -1,0 +1,22 @@
+:toc: left
+:toclevels: 4
+:sectnums:
+
+= Icellmobilsoft wildfly dockerimage
+
+[#index]
+== Common
+
+The repository is a collection of wildfly docker images used in icellmobilsoft,
+to keep projects and their builds on the same basis.
+
+The project can be divided into several parts, completing each other.
+
+include::architecture.adoc[leveloffset=+1]
+
+include::project-structure.adoc[leveloffset=+1]
+
+[#release-notes]
+== Release notes
+
+include::release-notes/v1.0.0.adoc[leveloffset=+2]

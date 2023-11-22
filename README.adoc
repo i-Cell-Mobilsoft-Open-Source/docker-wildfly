@@ -1,0 +1,66 @@
+:toc: left
+:toclevels: 4
+:sectnums:
+
+= The docker-wildfly images
+
+The repository is a collection of wildfly docker images used in icellmobilsoft,
+to keep projects and their builds on the same basis.
+
+The project can be divided into several parts, completing each other.
+
+[IMPORTANT]
+====
+The docker images contain the following components:
+
+* Wildfly: 27.x (Jakarta EE10)
+* Java: 17.x
+* Base image version: 1.3.x FIXME:1.4.x
+====
+
+.Compatibility
+[options="header"]
+|===
+|Version  |Jakarta EE |Wildfly
+//----------------------
+|1.0.x   |Jakarta EE 10  |Widlfy 27.0.1.Final
+|===
+
+The repository is a collection of wildfly docker images used in icellmobilsoft,
+to keep projects and their builds on the same basis.
+
+The project can be divided into several parts, completing each other.
+
+== Project structure
+
+=== /dockerfile
+Collection of the dockerfiles.
+For a detailed description of the docker image created, see FIXME[Docker Wildfly Images].
+
+=== /script
+Common scripts that are also used by dockerimages,
+but can also be used on their own.
+
+== Development
+All you need to know is the following command:
+
+[source,bash]
+----
+docker-compose -f <PATH>/docker-base/docker-compose-1.yml build
+docker-compose -f <PATH>/docker-base/docker-compose-2.yml build
+docker-compose -f <PATH>/docker-base/docker-compose-3.yml build
+----
+[IMPORTANT]
+====
+The release and docker push commands MUST be handled exclusively by Github Actions! 
+====
+
+== Release
+The release is done by Github Actions.
+Basically we handle 2 cases:
+
+. *Major, Minor version* - major version release, can only be generated from *master branch*.
+. *Bugfix version* - can only be generated from *release branch*.
+
+The associated CI appears only for the corresponding branches.
+

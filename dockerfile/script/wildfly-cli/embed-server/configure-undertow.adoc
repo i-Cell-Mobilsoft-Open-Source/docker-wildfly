@@ -1,0 +1,1 @@
+|UNDERTOW_HTTP_MAX_POST_SIZE |undertow.http.max-post-size |10485760 (10MB) | Size limit of HTTP POST requests. Larger sizes are automatically dropped by Wildfly and returned with an error message.
