@@ -2,6 +2,26 @@
 ARG BASE_IMAGE
 ARG DOCKER_IMAGE_GALLEON
 ARG GALLEON_LAYERS
+ARG ARTIFACT_DOWNLOADER_IMAGE
+
+################################################################################
+# Download .jar
+################################################################################
+FROM $ARTIFACT_DOWNLOADER_IMAGE as download
+
+ARG POM_GROUP_ID
+ARG POM_ARTIFACT_ID
+ARG POM_VERSION
+ARG POM_EXTENSION
+
+ENV NEXUS_OBJECT_GROUP_ID=$POM_GROUP_ID
+ENV NEXUS_OBJECT_ARTIFACT_ID=$POM_ARTIFACT_ID
+ENV NEXUS_OBJECT_VERSION=$POM_VERSION
+ENV NEXUS_OBJECT_EXTENSION=$POM_EXTENSION
+
+ENV NEXUS_DOWNLOAD_OUTPUT_FILE_NAME=$NEXUS_OBJECT_ARTIFACT_ID.$NEXUS_OBJECT_EXTENSION
+
+RUN $HOME/script/maven-search-download.sh
 
 ################################################################################
 # galleon image
@@ -41,6 +61,22 @@ ENV CONFIG_DIR=$HOME/config
 ENV WILDFLY_PROPERTIES_FILE=$CONFIG_DIR/wildfly.properties
 ENV LAUNCH_JBOSS_IN_BACKGROUND=true
 
+ARG POM_GROUP_ID
+ARG POM_ARTIFACT_ID
+ARG POM_VERSION
+
+ARG TMP_DIR=$HOME/tmp
+ARG DOWNLOAD_DIR=$HOME/download
+
+COPY --from=download --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP ${DOWNLOAD_DIR}/ ${TMP_DIR}/
+COPY --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP dockerfile/script/wildfly-cli/module/logstash.cli $TMP_DIR/module/logstash.cli
+COPY --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP \
+    dockerfile/script/wildfly-cli/embed-server/configure-logging.cli \
+    dockerfile/script/wildfly-cli/embed-server/configure-logging-file.cli \
+    dockerfile/script/wildfly-cli/embed-server/configure-logstash.cli \
+    dockerfile/wildfly/logstash/embed-server.cli \
+    $TMP_DIR/embed-server/
+
 RUN set -x; \
     mkdir -m u=rwx,g=rwx,o=rx -p $CONFIG_DIR && \
     chown -R $SYSTEM_USER:$SYSTEM_USER_GROUP $CONFIG_DIR && \
@@ -53,11 +89,26 @@ RUN echo "# Icellmobilsoft Java17 custom packages" >> $WILDFLY_HOME/bin/standalo
     ADDITIONAL_JPMS="JAVA_OPTS=\"\$JAVA_OPTS --add-opens=java.base/java.net=ALL-UNNAMED\"" && \
     echo "$ADDITIONAL_JPMS" >> $WILDFLY_HOME/bin/standalone.conf
 
+## logstash
+RUN set -x; \
+    echo "LOGSTASH_RESOURCES=$TMP_DIR/logstash-gelf.jar" >> $TMP_DIR/wf.properties && \
+    echo "TMP_DIR=$TMP_DIR" >> $TMP_DIR/wf.properties && \
+    $WILDFLY_HOME/bin/jboss-cli.sh \
+        --file=$TMP_DIR/module/logstash.cli \
+        --properties=$TMP_DIR/wf.properties && \
+    $WILDFLY_HOME/bin/jboss-cli.sh \
+        --file=$TMP_DIR/embed-server/embed-server.cli \
+        --properties=$TMP_DIR/wf.properties && \
+    rm -rf ${TMP_DIR} && \
+    rm -rf $WILDFLY_HOME/standalone/configuration/standalone_xml_history
+
 LABEL base.image=$BASE_IMAGE
 LABEL builder.images=$DOCKER_IMAGE_GALLEON
+LABEL wildfly.modules=logstash
 LABEL wildfly.version=$WILDFLY_VERSION
 LABEL galleon.image=$DOCKER_IMAGE_GALLEON
 LABEL galleon.layers=$GALLEON_LAYERS
+LABEL logstash.version=$POM_GROUP_ID:$POM_ARTIFACT_ID:$POM_VERSION
 LABEL wildfly.properties.file=$WILDFLY_PROPERTIES_FILE
 
 EXPOSE 8080 8443 9990 8787

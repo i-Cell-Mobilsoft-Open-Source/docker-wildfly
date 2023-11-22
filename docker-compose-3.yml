@@ -13,42 +13,42 @@ services:
   # prerequisite: services in docker-compose-2.yml must be built!
   #############################################################################
   # logstash 
-  wildfly-logstash-release:
-    build:
-      context: .
-      dockerfile: dockerfile/wildfly/logstash/Dockerfile
-      args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_MP
-        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
-        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
-        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
-        POM_VERSION: $LOGSTASH_POM_VERSION
-        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
-    image: $DOCKER_IMAGE_WF_LOGSTASH
-  wildfly-jpa-logstash-release:
-    build:
-      context: .
-      dockerfile: dockerfile/wildfly/logstash/Dockerfile
-      args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA_MP
-        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
-        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
-        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
-        POM_VERSION: $LOGSTASH_POM_VERSION
-        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
-    image: $DOCKER_IMAGE_WF_JPA_LOGSTASH
-  wildfly-full-logstash-release:
-    build:
-      context: .
-      dockerfile: dockerfile/wildfly/logstash/Dockerfile
-      args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_MP
-        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
-        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
-        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
-        POM_VERSION: $LOGSTASH_POM_VERSION
-        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
-    image: $DOCKER_IMAGE_WF_FULL_LOGSTASH
+#  wildfly-logstash-release:
+#    build:
+#      context: .
+#      dockerfile: dockerfile/wildfly/logstash/Dockerfile
+#      args:
+#        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_MP
+#        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+#        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
+#        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
+#        POM_VERSION: $LOGSTASH_POM_VERSION
+#        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
+#    image: $DOCKER_IMAGE_WF_LOGSTASH
+#  wildfly-jpa-logstash-release:
+#    build:
+#      context: .
+#      dockerfile: dockerfile/wildfly/logstash/Dockerfile
+#      args:
+#        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA_MP
+#        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+#        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
+#        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
+#        POM_VERSION: $LOGSTASH_POM_VERSION
+#        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
+#    image: $DOCKER_IMAGE_WF_JPA_LOGSTASH
+#  wildfly-full-logstash-release:
+#    build:
+#      context: .
+#      dockerfile: dockerfile/wildfly/logstash/Dockerfile
+#      args:
+#        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_MP
+#        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+#        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
+#        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
+#        POM_VERSION: $LOGSTASH_POM_VERSION
+#        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
+#    image: $DOCKER_IMAGE_WF_FULL_LOGSTASH
   # oracle-jdbc
   wildfly-oracle-jdbc-release:
     build:
