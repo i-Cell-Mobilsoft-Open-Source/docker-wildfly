@@ -7,7 +7,7 @@ version: "3.8"
 # start
 # docker run --rm icellmobilsoft/wildfly-mp-ms
 # check labels
-# docker inspect icellmobilsoft/wildfly-mp-ms | jq -r '.[0].Config.Labels'
+# docker inspect icellmobilsoft/wildfly-mp-ms:1.0.0 | jq -r '.[0].Config.Labels'
 services:
   #############################################################################
   # prerequisite: services in docker-compose-2.yml must be built!

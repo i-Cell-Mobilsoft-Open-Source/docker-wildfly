@@ -4,11 +4,11 @@ version: "3.8"
 # galleon needs DOCKER_BUILDKIT as well 
 # DOCKER_BUILDKIT=1 docker compose -f docker-compose-2.yml build --no-cache
 # run something inside the image
-# docker run --rm -it dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms /bin/bash
+# docker run --rm -it icellmobilsoft/wildfly-mp-ms /bin/bash
 # start
-# docker run --rm dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms
+# docker run --rm icellmobilsoft/wildfly-mp-ms
 # check labels
-# docker inspect dockerhub-dockerio.icellmobilsoft.hu/wildfly/oracle-jdbc:1.0.0 | jq -r '.[0].Config.Labels'
+# docker inspect icellmobilsoft/wildfly-mp-ms:1.0.0 | jq -r '.[0].Config.Labels'
 
 services:
   # Starting point common/Dockerfile 
