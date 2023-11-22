@@ -1,2 +1,2 @@
-|SPEC_DESCRIPTOR_PROPERTY_REPLACEMENT |spec-descriptor.property-replacement |true | Változók használata a property fájlokban (ejb-jar.xml, persistence.xml)
+|SPEC_DESCRIPTOR_PROPERTY_REPLACEMENT |spec-descriptor.property-replacement |true | Use variables in the property/descriptor files (ejb-jar.xml, persistence.xml)
 

@@ -1,3 +1,4 @@
+|ORACLE_DS_SERVICENAME |oracle.ds.servicename |icellmobilsoft |Service name for datasource, postfixed with DS automatically -> icellmobilsoftDS by default
 |ORACLE_DS_CONNECTION_URL |oracle.ds.connection.url |- |Oracle DB connection url
 |ORACLE_DS_USERNAME |oracle.ds.username |- |Oracle DB connection user
 |ORACLE_DS_PASSWORD |oracle.ds.password |- |Oracle DB connection password

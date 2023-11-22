@@ -4,8 +4,7 @@
 # Start batching commands
 
 # Properties
-#set dsName=${oracle.ds.service.name}DS
-set dsName=icellmobilsoftDS
+set dsName=\${env.ORACLE_DS_SERVICENAME,oracle.ds.servicename:icellmobilsoft}DS
 set dsConnectionUrl=\${env.ORACLE_DS_CONNECTION_URL,oracle.ds.connection.url}
 set dsUsername=\${env.ORACLE_DS_USERNAME,oracle.ds.username}
 set dsPassword=\${env.ORACLE_DS_PASSWORD,oracle.ds.password}

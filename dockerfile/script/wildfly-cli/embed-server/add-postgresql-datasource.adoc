@@ -1,3 +1,4 @@
+|POSTGRESQL_DS_SERVICENAME |postgresql.ds.servicename |icellmobilsoft |Service name for datasource, postfixed with DS automatically -> icellmobilsoftDS by default
 |POSTGRESQL_DS_CONNECTION_URL |postgresql.ds.connection.url |- |PostgreSQL DB connection url
 |POSTGRESQL_DS_USERNAME |postgresql.ds.username |- |PostgreSQL DB connection user
 |POSTGRESQL_DS_PASSWORD |postgresql.ds.password |- |PostgreSQL DB connection password
