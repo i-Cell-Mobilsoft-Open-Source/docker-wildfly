@@ -74,7 +74,7 @@ COPY --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP \
     dockerfile/script/wildfly-cli/embed-server/configure-logging.cli \
     dockerfile/script/wildfly-cli/embed-server/configure-logging-file.cli \
     dockerfile/script/wildfly-cli/embed-server/configure-logstash.cli \
-    dockerfile/wildfly/logstash/embed-server.cli \
+    dockerfile/wildfly/common/embed-server.cli \
     $TMP_DIR/embed-server/
 
 RUN set -x; \
