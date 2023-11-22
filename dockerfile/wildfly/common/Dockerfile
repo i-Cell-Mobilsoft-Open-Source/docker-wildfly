@@ -59,6 +59,6 @@ LABEL galleon.image=$DOCKER_IMAGE_GALLEON
 LABEL galleon.layers=$GALLEON_LAYERS
 LABEL wildfly.properties.file=$WILDFLY_PROPERTIES_FILE
 
-EXPOSE 8080 9990
+EXPOSE 8080 8443 9990 8787
 
 CMD exec "$WILDFLY_HOME/bin/standalone.sh" -P $WILDFLY_PROPERTIES_FILE -b 0.0.0.0 -bmanagement 0.0.0.0
