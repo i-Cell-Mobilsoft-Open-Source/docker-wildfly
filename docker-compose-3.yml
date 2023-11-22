@@ -66,9 +66,6 @@ services:
         POM_ORAI18N_VERSION: $ORACLE_ORAI18N_VERSION
         POM_ORAI18N_EXTENSION: $ORACLE_ORAI18N_EXTENSION
     image: $DOCKER_IMAGE_WF_ORACLE_JDBC
-    depends_on:
-      wildfly-jpa-logstash-release: 
-        condition: service_completed_successfully
   wildfly-full-oracle-jdbc-release:
     build:
       context: .
@@ -85,9 +82,6 @@ services:
         POM_ORAI18N_VERSION: $ORACLE_ORAI18N_VERSION
         POM_ORAI18N_EXTENSION: $ORACLE_ORAI18N_EXTENSION
     image: $DOCKER_IMAGE_WF_FULL_ORACLE_JDBC
-    depends_on:
-      wildfly-full-logstash-release: 
-        condition: service_completed_successfully
   # postgresql-jdbc
   wildfly-postgresql-jdbc-release:
     build:
@@ -101,9 +95,6 @@ services:
         POM_VERSION: $POSTGRES_JDBC_POM_VERSION
         POM_EXTENSION: $POSTGRES_JDBC_POM_EXTENSION
     image: $DOCKER_IMAGE_WF_POSTGRESQL_JDBC
-    depends_on:
-      wildfly-jpa-logstash-release: 
-        condition: service_completed_successfully
   wildfly-full-postgresql-jdbc-release:
     build:
       context: .
@@ -116,9 +107,6 @@ services:
         POM_VERSION: $POSTGRES_JDBC_POM_VERSION
         POM_EXTENSION: $POSTGRES_JDBC_POM_EXTENSION
     image: $DOCKER_IMAGE_WF_FULL_POSTGRESQL_JDBC
-    depends_on:
-      wildfly-full-logstash-release: 
-        condition: service_completed_successfully
   # ibm-mq 
   wildfly-full-oracle-jdbc-ibm-mq-release:
     build:
