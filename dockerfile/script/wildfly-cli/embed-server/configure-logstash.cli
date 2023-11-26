@@ -2,7 +2,8 @@
 # logstash handler for the logging subsystem
 
 # __don't use__ space at '=' sign!
-set logstashEnabled=\${env.LOGSTASH_ENABLED,logstash.enabled:true}
+set logstashEnabled=\${env.LOGSTASH_ENABLED,logstash.enabled:false}
+set logstashBlockingMode=\${env.LOGSTASH_BLOCKING_MODE,logstash.blocking.mode:DISCARD}
 set logstashHost=\${env.LOGSTASH_HOST,logstash.host:127.0.0.1}
 set logstashPort=\${env.LOGSTASH_PORT,logstash.port:8000}
 
@@ -29,7 +30,7 @@ set logstashPort=\${env.LOGSTASH_PORT,logstash.port:8000}
 /subsystem=logging/async-handler=ASYNCGELF:add(queue-length="50000")
 
 # BLOCK or DISCARD
-/subsystem=logging/async-handler=ASYNCGELF:write-attribute(name="overflow-action", value="BLOCK")
+/subsystem=logging/async-handler=ASYNCGELF:write-attribute(name="overflow-action", value="$logstashBlockingMode")
 
 # manage GELF_LOGGER custom handler
 /subsystem=logging/async-handler=ASYNCGELF:add-handler(name="GELF_LOGGER")

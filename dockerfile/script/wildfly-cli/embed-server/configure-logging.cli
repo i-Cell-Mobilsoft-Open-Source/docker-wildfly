@@ -1,7 +1,7 @@
 # $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-logging.cli
 # modify standard logging setup to company defaults
 
-set consoleLoggingEnabled=\${env.CONSOLE_LOGGING_ENABLED,console.logging.enabled:true}
+set consoleLoggingEnabled=\${env.CONSOLE_LOGGING_ENABLED,console.logging.enabled:false}
 set etcdLoggerLoglevel=\${env.LOGGING_COFFEE_ETCD_LOGGER_LOGLEVEL,logging.coffee.etcd.logger.loglevel:INFO}
 set huIcellmobilsoftLoggerLoglevel=\${env.LOGGING_HU_ICELLMOBILSOFT_LOGGER_LOGLEVEL,logging.hu.icellmobilsoft.logger.loglevel:ALL}
 set rootLoggerLoglevel=\${env.LOGGING_ROOT_LOGGER_LOGLEVEL,logging.root.logger.loglevel:INFO}

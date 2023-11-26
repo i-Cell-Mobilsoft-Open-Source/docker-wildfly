@@ -2,7 +2,7 @@
 # configure logging to Json logs
 
 # __don't use__ space at '=' sign!
-set consoleLoggingEnabled=\${env.CONSOLE_LOGGING_ENABLED,console.logging.enabled:true}
+set consoleJsonLoggingEnabled=\${env.CONSOLE_JSON_LOGGING_ENABLED,console.json.logging.enabled:false}
 
 /subsystem=logging/json-formatter=JSON_FORMATTER:add(exception-output-type=formatted, pretty-print=false, zone-id=UTC)
 # we use the original console logger and creating a new one for json
