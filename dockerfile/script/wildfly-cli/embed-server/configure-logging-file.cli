@@ -5,6 +5,10 @@
 set fileLoggingEnabled=\${env.FILE_LOGGING_ENABLED,file.logging.enabled:false}
 set fileLoggingBlockingMode=\${env.FILE_LOGGING_BLOCKING_MODE,file.logging.blocking.mode:DISCARD}
 
+# remove original rotating FILE logger
+/subsystem=logging/root-logger=ROOT:remove-handler(name=FILE)
+/subsystem=logging/periodic-rotating-file-handler=FILE:remove()
+
 # change the default "periodic-rotating-file-handler"-t to the sliced "periodic-size-rotating-file-handler"
 /subsystem=logging/periodic-size-rotating-file-handler=FILE-50M:add(enabled=$fileLoggingEnabled, append=true, autoflush=true, file={path=service.log, relative-to=jboss.server.log.dir}, named-formatter=PATTERN, rotate-size=50M, suffix=.yyy-MM-dd, max-backup-index=50)
 /subsystem=logging/root-logger=ROOT:add-handler(name=FILE-50M)

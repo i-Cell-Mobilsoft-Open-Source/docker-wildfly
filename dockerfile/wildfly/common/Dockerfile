@@ -71,9 +71,10 @@ ARG DOWNLOAD_DIR=$HOME/download
 COPY --from=download --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP ${DOWNLOAD_DIR}/ ${TMP_DIR}/
 COPY --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP dockerfile/script/wildfly-cli/module/logstash.cli $TMP_DIR/module/logstash.cli
 COPY --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP \
-    dockerfile/script/wildfly-cli/embed-server/configure-logging.cli \
+    dockerfile/script/wildfly-cli/embed-server/configure-logging-console.cli \
     dockerfile/script/wildfly-cli/embed-server/configure-logging-file.cli \
     dockerfile/script/wildfly-cli/embed-server/configure-logstash.cli \
+    dockerfile/script/wildfly-cli/embed-server/configure-logging.cli \
     dockerfile/wildfly/common/embed-server.cli \
     $TMP_DIR/embed-server/
 
@@ -89,13 +90,10 @@ RUN echo "# Icellmobilsoft Java17 custom packages" >> $WILDFLY_HOME/bin/standalo
     ADDITIONAL_JPMS="JAVA_OPTS=\"\$JAVA_OPTS --add-opens=java.base/java.net=ALL-UNNAMED\"" && \
     echo "$ADDITIONAL_JPMS" >> $WILDFLY_HOME/bin/standalone.conf
 
-## logstash
+## logging
 RUN set -x; \
     echo "LOGSTASH_RESOURCES=$TMP_DIR/logstash-gelf.jar" >> $TMP_DIR/wf.properties && \
     echo "TMP_DIR=$TMP_DIR" >> $TMP_DIR/wf.properties && \
-    $WILDFLY_HOME/bin/jboss-cli.sh \
-        --file=$TMP_DIR/module/logstash.cli \
-        --properties=$TMP_DIR/wf.properties && \
     $WILDFLY_HOME/bin/jboss-cli.sh \
         --file=$TMP_DIR/embed-server/embed-server.cli \
         --properties=$TMP_DIR/wf.properties && \
@@ -104,7 +102,8 @@ RUN set -x; \
 
 LABEL base.image=$BASE_IMAGE
 LABEL builder.images=$DOCKER_IMAGE_GALLEON
-LABEL wildfly.modules=logstash
+#in case of logstash enabled
+#LABEL wildfly.modules=logstash
 LABEL wildfly.version=$WILDFLY_VERSION
 LABEL galleon.image=$DOCKER_IMAGE_GALLEON
 LABEL galleon.layers=$GALLEON_LAYERS

@@ -1,0 +1,8 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-logging-console.cli
+# modify standard logging setup to company defaults
+
+set consoleLoggingEnabled=\${env.CONSOLE_LOGGING_ENABLED,console.logging.enabled:true}
+
+# log everything to the console at development stage (root logger)
+/subsystem=logging/console-handler=CONSOLE:undefine-attribute(name=level)
+/subsystem=logging/console-handler=CONSOLE:write-attribute(name=enabled, value=$consoleLoggingEnabled)

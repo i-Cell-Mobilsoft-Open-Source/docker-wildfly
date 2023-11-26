@@ -4,9 +4,11 @@
 embed-server --std-out=echo
  
 # Start batching commands
-run-batch --file=${TMP_DIR}/embed-server/configure-logging.cli
+run-batch --file=${TMP_DIR}/embed-server/configure-logging-console.cli
 run-batch --file=${TMP_DIR}/embed-server/configure-logging-file.cli
 run-batch --file=${TMP_DIR}/embed-server/configure-logstash.cli
+#pattern, loglevels
+run-batch --file=${TMP_DIR}/embed-server/configure-logging.cli
 
 # Stop embedded server
 stop-embedded-server
