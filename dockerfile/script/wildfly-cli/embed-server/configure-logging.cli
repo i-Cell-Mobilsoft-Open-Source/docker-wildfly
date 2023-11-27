@@ -1,9 +1,14 @@
-# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-logging.cli
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-logging-console.cli
 # modify standard logging setup to company defaults
 
+set consoleLoggingEnabled=\${env.CONSOLE_LOGGING_ENABLED,console.logging.enabled:true}
 set etcdLoggerLoglevel=\${env.LOGGING_COFFEE_ETCD_LOGGER_LOGLEVEL,logging.coffee.etcd.logger.loglevel:INFO}
 set huIcellmobilsoftLoggerLoglevel=\${env.LOGGING_HU_ICELLMOBILSOFT_LOGGER_LOGLEVEL,logging.hu.icellmobilsoft.logger.loglevel:ALL}
 set rootLoggerLoglevel=\${env.LOGGING_ROOT_LOGGER_LOGLEVEL,logging.root.logger.loglevel:INFO}
+
+# log everything to the console at development stage (root logger)
+/subsystem=logging/console-handler=CONSOLE:undefine-attribute(name=level)
+/subsystem=logging/console-handler=CONSOLE:write-attribute(name=enabled, value=$consoleLoggingEnabled)
 
 # use company pattern
 /subsystem=logging/pattern-formatter=PATTERN:write-attribute(name=pattern,value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [thread:%t] [%c{10}] [sid:%X{extSessionId}] [k8s_namespace:${env.LOGGING_K8S_NAMESPACE:}] - %s%E%n")

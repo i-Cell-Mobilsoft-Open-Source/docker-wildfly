@@ -9,4 +9,3 @@ set consoleJsonLoggingEnabled=\${env.CONSOLE_JSON_LOGGING_ENABLED,console.json.l
 /subsystem=logging/console-handler=CONSOLE_JSON:add(enabled=$consoleLoggingEnabled, named-formatter=JSON_FORMATTER)
 # change root handler
 /subsystem=logging/root-logger=ROOT:add-handler(name=CONSOLE_JSON)
-/subsystem=logging/root-logger=ROOT:remove-handler(name=CONSOLE)
