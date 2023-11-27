@@ -1,2 +1,2 @@
 |FILE_LOGGING_ENABLED |file.logging.enabled |false | Enable file logging. The maximum file size is 50MB by default.
-|FILE_LOGGING_BLOCKING_MODE |file.logging.blocking.mode |DISCARD | Enable (BLOCK) or disable (DISCARD) blocking mode in case logs cannot be written
+|FILE_LOGGING_BLOCKING_MODE |file.logging.blocking.mode |BLOCK | Enable (BLOCK) or disable (DISCARD) blocking mode in case logs cannot be written
