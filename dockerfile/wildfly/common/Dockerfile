@@ -92,6 +92,9 @@ RUN echo "# Icellmobilsoft Java17 custom packages" >> $WILDFLY_HOME/bin/standalo
 
 ## logging
 RUN set -x; \
+    $WILDFLY_HOME/bin/jboss-cli.sh \
+        --file=$TMP_DIR/module/logstash.cli \
+        --properties=$TMP_DIR/wf.properties && \
     echo "LOGSTASH_RESOURCES=$TMP_DIR/logstash-gelf.jar" >> $TMP_DIR/wf.properties && \
     echo "TMP_DIR=$TMP_DIR" >> $TMP_DIR/wf.properties && \
     $WILDFLY_HOME/bin/jboss-cli.sh \
