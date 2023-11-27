@@ -1,1 +1,1 @@
-|CONSOLE_JSON_LOGGING_ENABLED |console.json.logging.enabled |false | Enable json console logging. 
+|CONSOLE_LOGGING_JSON_ENABLED |console.logging.json.enabled |true | Enable json console logging. 
