@@ -96,7 +96,7 @@ RUN set -x; \
     $WILDFLY_HOME/bin/jboss-cli.sh \
         --file=$TMP_DIR/module/logstash.cli \
         --properties=$TMP_DIR/wf.properties && \
-RUN $WILDFLY_HOME/bin/jboss-cli.sh \
+    $WILDFLY_HOME/bin/jboss-cli.sh \
         --file=$TMP_DIR/embed-server/embed-server.cli \
         --properties=$TMP_DIR/wf.properties && \
     rm -rf ${TMP_DIR} && \
