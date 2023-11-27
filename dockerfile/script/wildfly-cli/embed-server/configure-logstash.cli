@@ -3,7 +3,7 @@
 
 # __don't use__ space at '=' sign!
 set logstashEnabled=\${env.LOGSTASH_ENABLED,logstash.enabled:false}
-set logstashBlockingMode=\${env.LOGSTASH_BLOCKING_MODE,logstash.blocking.mode:DISCARD}
+set logstashBlockingMode=\${env.LOGSTASH_BLOCKING_MODE,logstash.blocking.mode:BLOCK}
 set logstashHost=\${env.LOGSTASH_HOST,logstash.host:127.0.0.1}
 set logstashPort=\${env.LOGSTASH_PORT,logstash.port:8000}
 
@@ -18,7 +18,7 @@ set logstashPort=\${env.LOGSTASH_PORT,logstash.port:8000}
     extractStackTrace=true, \
     facility="logstash-gelf", \
     timestampPattern="yyyy-MM-dd HH:mm:ss,SSS", \
-    # byte méret
+    # in bytes
     maximumMessageSize=8192, \
     includeFullMdc=true, \
     # statikus field hozzáadása
@@ -30,7 +30,7 @@ set logstashPort=\${env.LOGSTASH_PORT,logstash.port:8000}
 /subsystem=logging/async-handler=ASYNCGELF:add(queue-length="50000")
 
 # BLOCK or DISCARD
-/subsystem=logging/async-handler=ASYNCGELF:write-attribute(name="overflow-action", value="$logstashBlockingMode")
+/subsystem=logging/async-handler=ASYNCGELF:write-attribute(name="overflow-action", value=$logstashBlockingMode)
 
 # manage GELF_LOGGER custom handler
 /subsystem=logging/async-handler=ASYNCGELF:add-handler(name="GELF_LOGGER")
