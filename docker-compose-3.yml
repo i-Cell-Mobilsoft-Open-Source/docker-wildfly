@@ -76,7 +76,7 @@ services:
       context: .
       dockerfile: dockerfile/wildfly/ibm-mq/Dockerfile
       args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_ORACLE_JDBC
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MP_FULL_ORACLE_JDBC
         ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
         POM_GROUP_ID: $IBM_MQ_POM_GROUP_ID
         POM_ARTIFACT_ID: $IBM_MQ_POM_ARTIFACT_ID
