@@ -79,7 +79,7 @@ jobs:
         with:
           set: |
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
-          #push: true
+          push: true
           files: |
             docker-compose-1.yml
           targets: wildfly-ms-release,wildfly-jpa-release,wildfly-full-release
@@ -88,7 +88,7 @@ jobs:
         with:
           set: |
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
-          #push: true
+          push: true
           files: |
             docker-compose-2.yml
           targets: wildfly-ms-microprofile-release,wildfly-ms-jpa-microprofile-release,wildfly-full-microprofile-release
@@ -97,16 +97,16 @@ jobs:
         with:
           set: |
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
-          #push: true
+          push: true
           files: |
             docker-compose-3.yml
-          targets: wildfly-oracle-jdbc-release,wildfly-full-oracle-jdbc-release,wildfly-postgresql-jdbc-release,wildfly-full-postgresql-jdbc-release
+          targets: wildfly-mp-jpa-oracle-jdbc-release,wildfly-mp-full-oracle-jdbc-release,wildfly-mp-jpa-postgresql-jdbc-release,wildfly-mp-full-postgresql-jdbc-release
       - name: docker buildx bake "#4"
         uses: docker/bake-action@v4
         with:
           set: |
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
-          #push: true
+          push: true
           files: |
             docker-compose-3.yml
-          targets: wildfly-full-oracle-jdbc-ibm-mq-release 
+          targets: wildfly-mp-full-oracle-jdbc-ibm-mq-release 

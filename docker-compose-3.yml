@@ -13,7 +13,7 @@ services:
   # prerequisite: services in docker-compose-2.yml must be built!
   #############################################################################
   # oracle-jdbc
-  wildfly-oracle-jdbc-release:
+  wildfly-mp-jpa-oracle-jdbc-release:
     build:
       context: .
       dockerfile: dockerfile/wildfly/oracle-jdbc/Dockerfile
@@ -28,8 +28,8 @@ services:
         POM_ORAI18N_ARTIFACT_ID: $ORACLE_ORAI18N_ARTIFACT_ID
         POM_ORAI18N_VERSION: $ORACLE_ORAI18N_VERSION
         POM_ORAI18N_EXTENSION: $ORACLE_ORAI18N_EXTENSION
-    image: $DOCKER_IMAGE_WF_ORACLE_JDBC
-  wildfly-full-oracle-jdbc-release:
+    image: $DOCKER_IMAGE_WF_MP_JPA_ORACLE_JDBC
+  wildfly-mp-full-oracle-jdbc-release:
     build:
       context: .
       dockerfile: dockerfile/wildfly/oracle-jdbc/Dockerfile
@@ -44,9 +44,9 @@ services:
         POM_ORAI18N_ARTIFACT_ID: $ORACLE_ORAI18N_ARTIFACT_ID
         POM_ORAI18N_VERSION: $ORACLE_ORAI18N_VERSION
         POM_ORAI18N_EXTENSION: $ORACLE_ORAI18N_EXTENSION
-    image: $DOCKER_IMAGE_WF_FULL_ORACLE_JDBC
+    image: $DOCKER_IMAGE_WF_MP_FULL_ORACLE_JDBC
   # postgresql-jdbc
-  wildfly-postgresql-jdbc-release:
+  wildfly-mp-jpa-postgresql-jdbc-release:
     build:
       context: .
       dockerfile: dockerfile/wildfly/postgresql-jdbc/Dockerfile
@@ -57,8 +57,8 @@ services:
         POM_ARTIFACT_ID: $POSTGRES_JDBC_POM_ARTIFACT_ID
         POM_VERSION: $POSTGRES_JDBC_POM_VERSION
         POM_EXTENSION: $POSTGRES_JDBC_POM_EXTENSION
-    image: $DOCKER_IMAGE_WF_POSTGRESQL_JDBC
-  wildfly-full-postgresql-jdbc-release:
+    image: $DOCKER_IMAGE_WF_MP_JPA_POSTGRESQL_JDBC
+  wildfly-mp-full-postgresql-jdbc-release:
     build:
       context: .
       dockerfile: dockerfile/wildfly/postgresql-jdbc/Dockerfile
@@ -69,9 +69,9 @@ services:
         POM_ARTIFACT_ID: $POSTGRES_JDBC_POM_ARTIFACT_ID
         POM_VERSION: $POSTGRES_JDBC_POM_VERSION
         POM_EXTENSION: $POSTGRES_JDBC_POM_EXTENSION
-    image: $DOCKER_IMAGE_WF_FULL_POSTGRESQL_JDBC
+    image: $DOCKER_IMAGE_WF_MP_FULL_POSTGRESQL_JDBC
   # ibm-mq 
-  wildfly-full-oracle-jdbc-ibm-mq-release:
+  wildfly-mp-full-oracle-jdbc-ibm-mq-release:
     build:
       context: .
       dockerfile: dockerfile/wildfly/ibm-mq/Dockerfile
@@ -82,7 +82,7 @@ services:
         POM_ARTIFACT_ID: $IBM_MQ_POM_ARTIFACT_ID
         POM_VERSION: $IBM_MQ_POM_VERSION
         POM_EXTENSION: $IBM_MQ_POM_EXTENSION
-    image: $DOCKER_IMAGE_WF_FULL_ORACLE_JDBC_IBM_MQ
+    image: $DOCKER_IMAGE_WF_MP_FULL_ORACLE_JDBC_IBM_MQ
     depends_on:
-      wildfly-full-oracle-jdbc-release: 
+      wildfly-mp-full-oracle-jdbc-release: 
         condition: service_completed_successfully
