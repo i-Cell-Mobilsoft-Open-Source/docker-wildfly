@@ -1,0 +1,9 @@
+|LOGSTASH_ENABLED |logstash.enabled |false | Enable sending log entries to logstash server
+|LOGSTASH_BLOCKING_MODE |logstash.blocking.mode |DISCARD | Enable (BLOCK) or disable (DISCARD) blocking mode in case logs cannot be written
+|LOGSTASH_QUEUE_LENGTH |logstash.queue.length |50000 | Size of the async queue length
+|LOGSTASH_HOST |logstash.host |127.0.0.1 | Logstash server host.
+|LOGSTASH_PORT |logstash.port |8000 | Logstash server port.
+|LOGSTASH_MODULE_ID |- |unknown |Set the logstash logging additionalFields `moduleId` key value.
+|LOGSTASH_MODULE_VERSION |- |unknown |Set the ogstash logging additionalFields `moduleVersion` key value.
+|LOGSTASH_K8S_NAMESPACE |- |unknown |Set the logstash logging additionalFields `K8S_NAMESPACE` key value.
+|LOGSTASH_MDC_FIELDS |- |- |Set the logstash logging additionalFields additional key values.

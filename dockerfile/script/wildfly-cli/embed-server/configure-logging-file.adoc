@@ -1,0 +1,1 @@
+|FILE_LOGGING_ENABLED |file.logging.enabled |false | Enable file logging. The maximum file size is 50MB by default.

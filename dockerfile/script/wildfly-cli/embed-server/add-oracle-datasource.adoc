@@ -1,0 +1,7 @@
+|ORACLE_DS_SERVICENAME |oracle.ds.servicename |icellmobilsoft |Service name for datasource, postfixed with DS automatically -> icellmobilsoftDS by default
+|ORACLE_DS_CONNECTION_URL |oracle.ds.connection.url |- |Oracle DB connection url
+|ORACLE_DS_USERNAME |oracle.ds.username |- |Oracle DB connection user
+|ORACLE_DS_PASSWORD |oracle.ds.password |- |Oracle DB connection password
+|ORACLE_DS_NEW_CONNECTION_SQL |oracle.ds.new-connection-sql |BEGIN NULL; END; |Oracle DB new connection sql
+|ORACLE_DS_MIN_POOL_SIZE |oracle.ds.min-pool-size |1 |Oracle DB connection min pool size
+|ORACLE_DS_MAX_POOL_SIZE |oracle.ds.max-pool-size |60 |Oracle DB connection max pool size

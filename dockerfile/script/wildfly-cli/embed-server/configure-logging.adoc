@@ -1,0 +1,5 @@
+|CONSOLE_LOGGING_ENABLED                   |console.logging.enabled                   |false |Enable console logging
+|LOGGING_COFFEE_ETCD_LOGGER_LOGLEVEL       |logging.coffee.etcd.logger.loglevel       |INFO |Log level regarding ETCD classes
+|LOGGING_HU_ICELLMOBILSOFT_LOGGER_LOGLEVEL |logging.hu.icellmobilsoft.logger.loglevel |ALL  |Global log level for "hu.icellmobilsoft" packages
+|LOGGING_ROOT_LOGGER_LOGLEVEL              |logging.root.logger.loglevel              |INFO |Global log level
+|LOGGING_K8S_NAMESPACE                     |-                                         |-    |Value of key `k8s_namespace` in the logged string (log pattern)

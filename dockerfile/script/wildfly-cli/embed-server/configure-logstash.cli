@@ -1,0 +1,41 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-logging.cli
+# logstash handler for the logging subsystem
+
+# __don't use__ space at '=' sign!
+set logstashEnabled=\${env.LOGSTASH_ENABLED,logstash.enabled:false}
+set logstashBlockingMode=\${env.LOGSTASH_BLOCKING_MODE,logstash.blocking.mode:DISCARD}
+set logstashHost=\${env.LOGSTASH_HOST,logstash.host:127.0.0.1}
+set logstashPort=\${env.LOGSTASH_PORT,logstash.port:8000}
+set logstashQueueLength=\${env.LOGSTASH_QUEUE_LENGTH,logstash.queue.length:50000}
+
+/subsystem=logging/custom-handler=GELF_LOGGER/:add(module=biz.paluch.logging,class=biz.paluch.logging.gelf.wildfly.WildFlyGelfLogHandler,properties={ \
+    enabled=$logstashEnabled, \
+    host=$logstashHost, \
+    port=$logstashPort, \
+    version="1.0", \
+    level="TRACE", \
+    # Send the Stack-Trace to the StackTrace field
+    extractStackTrace=true, \
+    facility="logstash-gelf", \
+    timestampPattern="yyyy-MM-dd HH:mm:ss,SSS", \
+    # in bytes
+    maximumMessageSize=8192, \
+    includeFullMdc=true, \
+    # statikus field hozzáadása
+    additionalFields="moduleId=${env.LOGSTASH_MODULE_ID:unknown},moduleVersion=${env.LOGSTASH_MODULE_VERSION:unknown},K8S_NAMESPACE=${env.LOGSTASH_K8S_NAMESPACE:unknown},${env.LOGSTASH_MDC_FIELDS:}", \
+    additionalFieldTypes="field1=String,field2=String,field3=String" \
+})
+
+# create async-handler
+/subsystem=logging/async-handler=ASYNCGELF:add(queue-length=$logstashQueueLength)
+
+# BLOCK or DISCARD
+/subsystem=logging/async-handler=ASYNCGELF:write-attribute(name="overflow-action", value=$logstashBlockingMode)
+
+# manage GELF_LOGGER custom handler
+/subsystem=logging/async-handler=ASYNCGELF:add-handler(name="GELF_LOGGER")
+/subsystem=logging/root-logger=ROOT:add-handler(name=ASYNCGELF) 
+
+
+# in case we don't need async logger the following part can be ignored
+#/subsystem=logging/root-logger=ROOT:add-handler(name=GELF_LOGGER)

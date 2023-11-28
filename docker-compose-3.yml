@@ -1,0 +1,88 @@
+version: "3.8"
+
+# start build
+# BUILDKIT_PROGRESS=plain docker compose -f docker-compose-3.yml build --no-cache
+# run something inside the image
+# docker run --rm -it icellmobilsoft/wildfly-mp-ms /bin/bash
+# start
+# docker run --rm icellmobilsoft/wildfly-mp-ms
+# check labels
+# docker inspect icellmobilsoft/wildfly-mp-ms:1.0.0 | jq -r '.[0].Config.Labels'
+services:
+  #############################################################################
+  # prerequisite: services in docker-compose-2.yml must be built!
+  #############################################################################
+  # oracle-jdbc
+  wildfly-mp-jpa-oracle-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/oracle-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA_MP
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_OJDBC_GROUP_ID: $ORACLE_OJDBC11_POM_GROUP_ID
+        POM_OJDBC_ARTIFACT_ID: $ORACLE_OJDBC11_ARTIFACT_ID
+        POM_OJDBC_VERSION: $ORACLE_OJDBC11_VERSION
+        POM_OJDBC_EXTENSION: $ORACLE_OJDBC11_EXTENSION
+        POM_ORAI18N_GROUP_ID: $ORACLE_ORAI18N_POM_GROUP_ID
+        POM_ORAI18N_ARTIFACT_ID: $ORACLE_ORAI18N_ARTIFACT_ID
+        POM_ORAI18N_VERSION: $ORACLE_ORAI18N_VERSION
+        POM_ORAI18N_EXTENSION: $ORACLE_ORAI18N_EXTENSION
+    image: $DOCKER_IMAGE_WF_MP_JPA_ORACLE_JDBC
+  wildfly-mp-full-oracle-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/oracle-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_MP
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_OJDBC_GROUP_ID: $ORACLE_OJDBC11_POM_GROUP_ID
+        POM_OJDBC_ARTIFACT_ID: $ORACLE_OJDBC11_ARTIFACT_ID
+        POM_OJDBC_VERSION: $ORACLE_OJDBC11_VERSION
+        POM_OJDBC_EXTENSION: $ORACLE_OJDBC11_EXTENSION
+        POM_ORAI18N_GROUP_ID: $ORACLE_ORAI18N_POM_GROUP_ID
+        POM_ORAI18N_ARTIFACT_ID: $ORACLE_ORAI18N_ARTIFACT_ID
+        POM_ORAI18N_VERSION: $ORACLE_ORAI18N_VERSION
+        POM_ORAI18N_EXTENSION: $ORACLE_ORAI18N_EXTENSION
+    image: $DOCKER_IMAGE_WF_MP_FULL_ORACLE_JDBC
+  # postgresql-jdbc
+  wildfly-mp-jpa-postgresql-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/postgresql-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $POSTGRES_JDBC_POM_GROUP_ID
+        POM_ARTIFACT_ID: $POSTGRES_JDBC_POM_ARTIFACT_ID
+        POM_VERSION: $POSTGRES_JDBC_POM_VERSION
+        POM_EXTENSION: $POSTGRES_JDBC_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_MP_JPA_POSTGRESQL_JDBC
+  wildfly-mp-full-postgresql-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/postgresql-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_MP
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $POSTGRES_JDBC_POM_GROUP_ID
+        POM_ARTIFACT_ID: $POSTGRES_JDBC_POM_ARTIFACT_ID
+        POM_VERSION: $POSTGRES_JDBC_POM_VERSION
+        POM_EXTENSION: $POSTGRES_JDBC_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_MP_FULL_POSTGRESQL_JDBC
+  # ibm-mq 
+  wildfly-mp-full-oracle-jdbc-ibm-mq-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/ibm-mq/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MP_FULL_ORACLE_JDBC
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $IBM_MQ_POM_GROUP_ID
+        POM_ARTIFACT_ID: $IBM_MQ_POM_ARTIFACT_ID
+        POM_VERSION: $IBM_MQ_POM_VERSION
+        POM_EXTENSION: $IBM_MQ_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_MP_FULL_ORACLE_JDBC_IBM_MQ
+    depends_on:
+      wildfly-mp-full-oracle-jdbc-release: 
+        condition: service_completed_successfully

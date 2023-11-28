@@ -4,11 +4,11 @@ version: "3.8"
 # galleon needs DOCKER_BUILDKIT as well 
 # DOCKER_BUILDKIT=1 docker compose -f docker-compose-1.yml build --no-cache
 # run something inside the image
-# docker run --rm -it dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms /bin/bash
+# docker run --rm -it icellmobilsoft/wildfly-mp-ms /bin/bash
 # start
-# docker run --rm dockerhub-dockerio.icellmobilsoft.hu/wildfly/ms
+# docker run --rm icellmobilsoft/wildfly-mp-ms
 # check labels
-# docker inspect dockerhub-dockerio.icellmobilsoft.hu/wildfly/oracle-jdbc:1.0.0 | jq -r '.[0].Config.Labels'
+# docker inspect icellmobilsoft/wildfly-mp-ms:1.0.0 | jq -r '.[0].Config.Labels'
 services:
   # Starting point common/Dockerfile 
   wildfly-ms-release:
@@ -20,6 +20,11 @@ services:
         WILDFLY_VERSION: $WILDFLY_VERSION
         DOCKER_IMAGE_GALLEON: $DOCKER_IMAGE_GALLEON
         GALLEON_LAYERS: $GALLEON_LAYERS_MICROSERVICE
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
+        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
+        POM_VERSION: $LOGSTASH_POM_VERSION
+        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
     image: $DOCKER_IMAGE_WF_MS
   wildfly-jpa-release:
     build:
@@ -30,6 +35,11 @@ services:
         WILDFLY_VERSION: $WILDFLY_VERSION
         DOCKER_IMAGE_GALLEON: $DOCKER_IMAGE_GALLEON
         GALLEON_LAYERS: $GALLEON_LAYERS_JPA
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
+        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
+        POM_VERSION: $LOGSTASH_POM_VERSION
+        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
     image: $DOCKER_IMAGE_WF_MS_JPA
   wildfly-full-release:
     build:
@@ -40,4 +50,9 @@ services:
         WILDFLY_VERSION: $WILDFLY_VERSION
         DOCKER_IMAGE_GALLEON: $DOCKER_IMAGE_GALLEON
         GALLEON_LAYERS: full
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $LOGSTASH_POM_GROUP_ID
+        POM_ARTIFACT_ID: $LOGSTASH_POM_ARTIFACT_ID
+        POM_VERSION: $LOGSTASH_POM_VERSION
+        POM_EXTENSION: $LOGSTASH_POM_EXTENSION
     image: $DOCKER_IMAGE_WF_FULL

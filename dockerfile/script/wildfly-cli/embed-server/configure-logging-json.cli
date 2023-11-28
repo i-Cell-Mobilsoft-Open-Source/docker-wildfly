@@ -1,0 +1,20 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-logging-json.cli
+# configure logging to Json logs
+
+# __don't use__ space at '=' sign!
+set consoleLoggingJsonEnabled=\${env.CONSOLE_LOGGING_JSON_ENABLED,console.logging.json.enabled:true}
+set rootLoggerLoglevel=\${env.LOGGING_ROOT_LOGGER_LOGLEVEL,logging.root.logger.loglevel:INFO}
+set formatterZoneId=\${env.CONSOLE_LOGGING_JSON_FORMATTER_ZONEID,console.logging.json.formatter.zoneid:UTC}
+
+# log everything to the console at development stage (root logger)
+/subsystem=logging/console-handler=CONSOLE_JSON:add
+/subsystem=logging/console-handler=CONSOLE_JSON:undefine-attribute(name=level)
+/subsystem=logging/console-handler=CONSOLE_JSON:write-attribute(name=enabled, value=$consoleLoggingJsonEnabled)
+
+/subsystem=logging/json-formatter=JSON_FORMATTER:add(exception-output-type=formatted, pretty-print=false, zone-id=$formatterZoneId)
+/subsystem=logging/console-handler=CONSOLE_JSON:write-attribute(name=named-formatter, value=JSON_FORMATTER)
+
+# root logging level
+/subsystem=logging/root-logger=ROOT:write-attribute(name=level,value=$rootLoggerLoglevel)
+# change root handler
+/subsystem=logging/root-logger=ROOT:add-handler(name=CONSOLE_JSON)
