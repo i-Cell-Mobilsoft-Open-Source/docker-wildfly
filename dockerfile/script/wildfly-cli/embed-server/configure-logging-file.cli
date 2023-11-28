@@ -3,7 +3,6 @@
 
 # __don't use__ space at '=' sign!
 set fileLoggingEnabled=\${env.FILE_LOGGING_ENABLED,file.logging.enabled:false}
-set fileLoggingBlockingMode=\${env.FILE_LOGGING_BLOCKING_MODE,file.logging.blocking.mode:BLOCK}
 
 # remove original rotating FILE logger
 /subsystem=logging/root-logger=ROOT:remove-handler(name=FILE)

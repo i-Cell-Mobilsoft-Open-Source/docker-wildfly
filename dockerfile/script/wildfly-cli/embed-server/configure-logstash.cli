@@ -3,9 +3,10 @@
 
 # __don't use__ space at '=' sign!
 set logstashEnabled=\${env.LOGSTASH_ENABLED,logstash.enabled:false}
-set logstashBlockingMode=\${env.LOGSTASH_BLOCKING_MODE,logstash.blocking.mode:BLOCK}
+set logstashBlockingMode=\${env.LOGSTASH_BLOCKING_MODE,logstash.blocking.mode:DISCARD}
 set logstashHost=\${env.LOGSTASH_HOST,logstash.host:127.0.0.1}
 set logstashPort=\${env.LOGSTASH_PORT,logstash.port:8000}
+set logstashQueueLength=\${env.LOGSTASH_QUEUE_LENGTH,logstash.queue.length:50000}
 
 /subsystem=logging/custom-handler=GELF_LOGGER/:add(module=biz.paluch.logging,class=biz.paluch.logging.gelf.wildfly.WildFlyGelfLogHandler,properties={ \
     enabled=$logstashEnabled, \
@@ -26,7 +27,7 @@ set logstashPort=\${env.LOGSTASH_PORT,logstash.port:8000}
 })
 
 # create async-handler
-/subsystem=logging/async-handler=ASYNCGELF:add(queue-length="50000")
+/subsystem=logging/async-handler=ASYNCGELF:add(queue-length=$logstashQueueLength)
 
 # BLOCK or DISCARD
 /subsystem=logging/async-handler=ASYNCGELF:write-attribute(name="overflow-action", value=$logstashBlockingMode)

@@ -90,7 +90,7 @@ RUN echo "# Icellmobilsoft Java17 custom packages" >> $WILDFLY_HOME/bin/standalo
     ADDITIONAL_JPMS="JAVA_OPTS=\"\$JAVA_OPTS --add-opens=java.base/java.net=ALL-UNNAMED\"" && \
     echo "$ADDITIONAL_JPMS" >> $WILDFLY_HOME/bin/standalone.conf
 
-## add logstash module + add 4 handler
+## add logstash module + add 4 handlers
 RUN set -x; \
     echo "LOGSTASH_RESOURCES=$TMP_DIR/logstash-gelf.jar" >> $TMP_DIR/wf.properties && \
     echo "TMP_DIR=$TMP_DIR" >> $TMP_DIR/wf.properties && \
@@ -112,6 +112,6 @@ LABEL galleon.layers=$GALLEON_LAYERS
 LABEL logstash.version=$POM_GROUP_ID:$POM_ARTIFACT_ID:$POM_VERSION
 LABEL wildfly.properties.file=$WILDFLY_PROPERTIES_FILE
 
-EXPOSE 8080 8443 9990 8787
+EXPOSE 8080 8443 9990 8787 4712 4713 9993 8009
 
 CMD exec "$WILDFLY_HOME/bin/standalone.sh" -P $WILDFLY_PROPERTIES_FILE -b 0.0.0.0 -bmanagement 0.0.0.0
