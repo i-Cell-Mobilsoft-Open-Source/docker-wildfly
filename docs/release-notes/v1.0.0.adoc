@@ -12,5 +12,13 @@ not counting updates, it is 1:1 compatible with version 1.3.0.
 ** wildfly-ms/mp -> icellmobilsoft/wildfly-mp-ms
 ** wildfly-ms/jpa/mp -> icellmobilsoft/wildfly-mp-jpa
 ** wildfly-full/mp -> icellmobilsoft/wildfly-mp-full
+** wildfly-ms/logstash -> icellmobilsoft/wildfly-mp-ms
+** wildfly-ms/jpa-logstash -> icellmobilsoft/wildfly-mp-jpa
+** wildfly-full/logstash -> icellmobilsoft/wildfly-mp-full
+** wildfly-ms/oracle-jdbc -> icellmobilsoft/wildfly-mp-jpa-oracle-jdbc
+** wildfly-full/oracle-jdbc -> icellmobilsoft/wildfly-mp-full-oracle-jdbc
+** wildfly-ms/postgresql-jdbc -> icellmobilsoft/wildfly-mp-jpa-postgresql-jdbc
+** wildfly-full/postgresql-jdbc -> icellmobilsoft/wildfly-mp-full-postgresql-jdbc
+** wildfly-full/oracle-jdbc-ibm-mq -> icellmobilsoft/wildfly-mp-full-oracle-jdbc-ibm-mq
 
 .What's new
