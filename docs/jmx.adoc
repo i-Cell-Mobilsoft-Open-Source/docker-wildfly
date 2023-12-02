@@ -1,0 +1,45 @@
+[#jmx]
+= JMX usage
+
+The modules for the wildfly jmx subsystem will be included in the images created by galleon,
+but by default the subsystem is disabled.
+On developer images it can be activated with a cli script, so there is no need to run a separate shell script for jmx.
+
+.configure-jmx.cli
+[source, shell]
+----
+/subsystem=jmx:add
+/subsystem=jmx/remoting-connector=jmx:add(use-management-endpoint=true)
+
+# management auth is turned off - not important for local execution anyway
+/core-service=management/management-interface=http-interface:undefine-attribute(name=http-authentication-factory)
+/core-service=management/management-interface=http-interface:map-remove(name=http-upgrade, key=sasl-authentication-factory)
+----
+
+To connect, you may need wildfly-cli.jar on the client classpath.
+This can be done for example as follows:
+
+* download client jar
++
+[source, shell]
+----
+mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -Dartifact=org.wildfly.core:wildfly-cli:19.0.1.Final:jar:client
+----
+* add the downloaded jar to the classpath when starting the jmx client
++
+.visualvm sample
+[source, shell]
+----
+visualvm --cp:a ${HOME}/.m2/repository/org/wildfly/core/wildfly-cli/19.0.1.Final/wildfly-cli-19.0.1.Final-client.jar
+----
++
+.jconsole sample
+[source, shell]
+----
+jconsole -J-Djava.class.path="${JAVA_HOME}/lib/jconsole.jar:${JAVA_HOME}/lib/tools.jar:${HOME}/.m2/repository/org/wildfly/core/wildfly-cli/19.0.1.Final/wildfly-cli-19.0.1.Final-client.jar"
+----
+
+IMPORTANT::
+for the above commands, you should make sure that the environment variables used exist, or replace them with absolute paths, `~` cannot be used for user home!
+
+Wildfly allows jmx connection on the management port, url must be in the format `service:jmx:remote+http://localhost:${management.port}`.

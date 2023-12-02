@@ -41,7 +41,7 @@ jobs:
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
-          # Content is in PEM format (begins with: '-----BEGIN RSA PRIVATE KEY-----') SSH key
+          # The content is in PEM format (begins with: '-----BEGIN RSA PRIVATE KEY-----') SSH key
           key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB_TECHUSER }}
           name: id_rsa # optional
           known_hosts: ${{ secrets.KNOWN_HOSTS }} # jelenleg ures a tartalma

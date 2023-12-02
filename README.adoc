@@ -15,7 +15,7 @@ The docker images contain the following components:
 
 * Wildfly: 27.x (Jakarta EE10)
 * Java: 17.x
-* Base image version: 1.3.x FIXME:1.4.x
+* Base image version: 1.4.x
 ====
 
 .Compatibility
@@ -35,7 +35,7 @@ The project can be divided into several parts, completing each other.
 
 === /dockerfile
 Collection of the dockerfiles.
-For a detailed description of the docker image created, see FIXME[Docker Wildfly Images].
+For a detailed description of the docker image created, see https://i-cell-mobilsoft-open-source.github.io/docker-wildfly/[Docker Wildfly Images].
 
 === /script
 Common scripts that are also used by dockerimages,

@@ -1,0 +1,136 @@
+= Dockerfile
+The dockerfile structure is based on onion layering,
+can be reused to build another docker image.
+To do this, you need to give it the base image you want and it will add to it as needed.
+The required base images must meet certain conditions,
+which are usually bound by the names of the ENV parameters.
+These conditions are already described in https://github.com/i-Cell-Mobilsoft-Open-Source/docker-base[Dockerhub Icellmobilsoft image]
+repository.
+
+.LABEL
+LABEL is a very important part of the builtelt docker images.
+They show all the data,
+that was an important factor in building the docker image.
+A sample of how this can be extracted from the docker image:
+
+[source,bash]
+----
+<CONSOLE>:~$ docker inspect icellmobilsoft/wildfly-full/oracle-jdbc-ibm-mq:1.0.0-SNAPSHOT | jq -r '.[0].Config.Labels' <1>
+{
+  "apt-get.install": "fontconfig,fonts-dejavu", <2>
+  "base.image": "icellmobilsoft/wildfly-full/oracle-jdbc:1.0.0-SNAPSHOT", <3>
+  "builder.images": "icellmobilsoft.hu/icellmobilsoft/builder-java17-galleon:1.1.0-SNAPSHOT", <4>
+  "ee.configs": "managed-executor",
+  "galleon.image": "icellmobilsoft/icellmobilsoft/builder-java17-galleon:1.1.0-SNAPSHOT", <5>
+  "galleon.layers": "full", <6>
+  "ibm-mq.version": "com.ibm.mq:wmq.jmsra:9.1.0.8",
+  "image.usage": "release", <7>
+  "java.image": "eclipse-temurin:17.0.7_7-jre", <8>
+  "logstash.version": "biz.paluch.logging:logstash-gelf:1.14.1",
+  "microprofile.configs": "opentrace,metrics",
+  "oracle-jdbc.version": "com.oracle.database.jdbc:ojdbc10:19.7.0.0,com.oracle.database.nls:orai18n:19.7.0.0",
+  "wildfly.modules": "logstash,oracle-jdbc,ibm-mq", <9>
+  "wildfly.properties.file": "/home/icellmobilsoft/config/wildfly.properties", <10>
+  "wildfly.version": "27.0.1.Final" <11>
+}
+----
+<1> the command itself that cuts the label part from the complete docker inspect response
+<2> programs installed on linux base image
+<3> base image from which this particular image is derived (onion layering)
+<4> the images used in the build
+<5> name of the image that did the wildfly build
+<6> which galleon modules are used to build wildfly
+<7> image purpose. Intended for controlling, application image can only contain "release" value.
+<8> what image the java in the image comes from
+<9> what modules are manually installed in wildfly
+<10> the properties file used to start wildfly
+<11> wildfly version
+
+Some of the labels are from base image,
+when creating them, you have to be careful when to overwrite them.
+
+== wildfly/common
+In terms of layers, this is the only layer where the galleon is used to put together the wildfly application server.
+The base images are complemented with the logger java module serving logstash.
+For more information on layers, see the documentation at https://docs.wildfly.org/23/Galleon_Guide.html#wildfly_galleon_layers[wildfly_galleon_layers]. 
+
+In this case we will create these images from it:
+
+* *icellmobilsoft/wildfly-default-ms:${VERSION}* - Image meets basic microservice requirements
+* *icellmobilsoft/wildfly-default-jpa:${VERSION}* - Add jpa layer to the microservice image above
+* *icellmobilsoft/wildfly-default-full:${VERSION}* - Full wildfly with all existing modules
+
+The dockerfile is responsible for EXPOSE of the basic 8080 and 9990 ports,
+and the wildfly startup CMD.
+
+=== wildfly/microprofile
+Expands the base image created by common, with microprofile and executor config.
+This is necessary because wildfly builds the standalone.xml differently depending on the galleon layer.
+This layer combines all mp and ee configs that are good for full and ms wildfly.
+
+In this case we create these images from it:
+
+* *icellmobilsoft/wildfly-mp-ms:${VERSION}* - Basic microservice + microprofile configs
+* *icellmobilsoft/wildfly-mp-jpa:${VERSION}* - Add jpa layer to the microservice image above
+* *icellmobilsoft/wildfly-mp-full:${VERSION}* - Full wildfly with all existing modules + microprofile configs
+
+== wildfly/oracle-jdbc
+The wildfly in the given docker base image is supplemented with the logstash + oracle driver.
+
+In this case, these images are created from it:
+
+* *icellmobilsoft/wildfly-mp-jpa-oracle-jdbc:${VERSION}* - `icellmobilsoft/wildfly-mp-jpa:${VERSION}` + oracle driver
+* *icellmobilsoft/wildfly-mp-jpa-full-oracle-jdbc:${VERSION}* - `icellmobilsoft/wildfly-mp-full:${VERSION}` + oracle driver
+
+include::table/config-keys.start.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-logging.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-logging-file.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-logstash.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-managed-executor.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-opentracing.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-metrics.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-health.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-undertow.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-property-replacement.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/add-oracle-datasource.adoc[]
+include::table/config-keys.end.adoc[]
+
+== wildfly/postgresql-jdbc
+The wildfly in the given docker base image is supplemented with the logstash + postgresql driver.
+
+In this case, these images are created from it:
+
+* *icellmobilsoft/wildfly-mp-jpa-postgresql-jdbc:${VERSION}* - `icellmobilsoft/wildfly-mp-jpa:${VERSION}` + postgresql driver
+* *icellmobilsoft/wildfly-mp-full-postgresql-jdbc:${VERSION}* - `icellmobilsoft/wildfly-mp-full:${VERSION}` + postgresql driver
+
+include::table/config-keys.start.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-logging.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-logging-file.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-logstash.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-managed-executor.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-opentracing.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-metrics.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-health.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-undertow.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-property-replacement.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/add-postgresql-datasource.adoc[]
+include::table/config-keys.end.adoc[]
+
+== wildfly/ibm-mq
+Add ibm-mq deployment to the wildfly in the given docker base image.
+
+In this case, these images are created from it:
+
+* *icellmobilsoft/wildfly-mp-full-oracle-jdbc-ibm-mq:${VERSION}* - `icellmobilsoft/wildfly-mp-full-oracle-jdbc:${VERSION}` + ibm-mq driver
+
+include::table/config-keys.start.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-logging.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-logging-file.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-logstash.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-managed-executor.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-opentracing.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-metrics.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-health.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/configure-undertow.adoc[]
+include::../dockerfile/script/wildfly-cli/embed-server/add-oracle-datasource.adoc[]
+include::table/config-keys.end.adoc[]
