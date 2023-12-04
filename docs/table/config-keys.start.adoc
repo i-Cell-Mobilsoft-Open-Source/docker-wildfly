@@ -1,0 +1,4 @@
+Konfig beállítási lehetőségek:
+[options="header",cols="1,1,1,1"]
+|===
+|ENV kulcs |wildfly.properties kulcs |Default |Leírás

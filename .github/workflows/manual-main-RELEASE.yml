@@ -35,8 +35,8 @@ jobs:
 # pre release
 ###############
       - name: Import GPG key
-        # GPG privat kulcs, ami armor-al exportalva (kezdete: '-----BEGIN PGP PRIVATE KEY BLOCK-----') ez az egesz tartalom base64 elkodolva, az betoltve a secrets tartalomnak
-        # dekodoljuk a base64 elkodolt privat kulcsot es betoltjuk
+        # GPG private key exported by armor (begins with: '-----BEGIN PGP PRIVATE KEY BLOCK-----') the whole content encoded with base64, and loaded in the content of the secret
+        # Decode and load the base64 encoded private key
         run: |
           mkdir -p ~/.gnupg/
           echo "${{ secrets.GPG_SIGNING_KEY_GITHUB_TECHUSER }}" | base64 --decode > ~/.gnupg/private.key
@@ -44,7 +44,7 @@ jobs:
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
-          # A tartalma egy PEM formatumos (kezdete: '-----BEGIN RSA PRIVATE KEY-----') SSH kulcs
+          # The content is in PEM format (begins with: '-----BEGIN RSA PRIVATE KEY-----') SSH key
           key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB_TECHUSER }}
           name: id_rsa # optional
           known_hosts: ${{ secrets.KNOWN_HOSTS }} # jelenleg ures a tartalma
@@ -205,7 +205,7 @@ jobs:
           git add .
           git commit -a -m "${COMMIT_MESSAGE}"
           echo next master branch version is $TARGET_BRANCH_NEXT_VERSION
-      # Ez a step az előzőeket pusholja a branch-be megadott branchre, és az mr-t a base-re írja ki.
+      # This step pushes the previous steps to the given branch and creates an MR to the base
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.3
         with:
