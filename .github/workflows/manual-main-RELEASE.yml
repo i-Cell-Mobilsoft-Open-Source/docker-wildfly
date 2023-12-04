@@ -5,7 +5,7 @@ env:
   TECH_USER_USERNAME: ${{ vars.TECH_USER_USERNAME }}
   TECH_USER_EMAIL: ${{ vars.TECH_USER_EMAIL }}
   PROJECT_NAME: ${GITHUB_REPOSITORY#*/}
-  DOCKER_BAKE_PLATFORM: linux/amd64,linux/arm64
+  DOCKER_BAKE_PLATFORM: ${{ vars.BAKE_PLATFORMS }}
 
 on:
   workflow_dispatch:
