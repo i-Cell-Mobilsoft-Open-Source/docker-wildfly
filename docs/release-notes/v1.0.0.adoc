@@ -1,4 +1,4 @@
-= v1.0.0
+= v2.0.0
 
 The project has moved out of the internal repository,
 not counting updates, it is 1:1 compatible with version 1.3.0.
@@ -20,5 +20,20 @@ not counting updates, it is 1:1 compatible with version 1.3.0.
 ** wildfly-ms/postgresql-jdbc -> icellmobilsoft/wildfly-mp-jpa-postgresql-jdbc
 ** wildfly-full/postgresql-jdbc -> icellmobilsoft/wildfly-mp-full-postgresql-jdbc
 ** wildfly-full/oracle-jdbc-ibm-mq -> icellmobilsoft/wildfly-mp-full-oracle-jdbc-ibm-mq
+** (replaced) wildfly-ms/gcp -> icellmobilsoft/wildfly-mp-ms
+** (replaced) wildfly-ms/jpa-gcp -> icellmobilsoft/wildfly-mp-jpa
+** (replaced) wildfly-full/gcp -> icellmobilsoft/wildfly-mp-full
+** (replaced) wildfly-ms/postgresql-jdbc-gcp -> icellmobilsoft/wildfly-mp-jpa-postgresql-jdbc
+** (replaced) wildfly-full/postgresql-jdbc-gcp -> icellmobilsoft/wildfly-mp-full-postgresql-jdbc
 
-.What's new
+* Environment changes:
+** (new with old value) `ORACLE_DS_SERVICENAME` default `icellmobilsoft`+`DS`
+** (new with old value) `POSTGRESQL_DS_CONNECTION_URL` default `icellmobilsoft`+`DS`
+** (change value) `CONSOLE_LOGGING_ENABLED` default `false` (changed from `true`)
+** (new) `CONSOLE_LOGGING_JSON_ENABLED` default `true`
+** (new) `CONSOLE_LOGGING_JSON_FORMATTER_ZONEID` default `UTC`
+** (change value) `FILE_LOGGING_ENABLED` default `false` (changed from `true`)
+** (new with old value) `LOGSTASH_BLOCKING_MODE` default `DISCARD`
+** (new with old value) `LOGSTASH_QUEUE_LENGTH` default `50000`
+
+//.What's new
