@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  noteefy-rest-service:
+    container_name: wildfly-oss-test-local
+    build:
+      context: .
+      dockerfile: local.Dockerfile
+      args:
+        #WILDFLY_BASE_IMAGE: 'icellmobilsoft/wildfly-mp-jpa-oracle-jdbc:${BASEIMAGE_VERSION}'
+        WILDFLY_BASE_IMAGE: 'dockerhub-dockerio.icellmobilsoft.hu/icellmobilsoft/wildfly-mp-full-oracle-jdbc:2.0.0-SNAPSHOT'
+        WILDFLY_CLI_PATH: './jboss-cli'
+        #PERSISTENCE_HIBERNATE_DIALECT: org.hibernate.dialect.OracleDialect
+    volumes:
+      - './config/wildfly-${COMPOSE_PROFILE:-local}.properties:/home/icellmobilsoft/config/wildfly.properties'
+    #image: "noteefy-rest-service:develop-0.1.0-SNAPSHOT-local"
+    ports:
+      - '18080:8080' # REST
+      - '19990:9990' # Management
+      - '18787:8787' # Debug
+      - '9893:9893' # JMX
+    environment:
+      MP_CONFIG_PROFILE: ${COMPOSE_PROFILE:-local}
+      #org_apache_deltaspike_ProjectStage: Development
+      JMX_PORT: 9893
+      TZ: Europe/Budapest
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M

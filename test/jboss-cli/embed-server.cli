@@ -1,0 +1,10 @@
+# Start embedded server
+# embed-server --server-config=standalone-full.xml --std-out=echo
+embed-server --std-out=echo
+
+# Start batching commands
+#run-batch --file=${TMP_DIR}/embed-server/configure-email.cli
+run-batch --file=${TMP_DIR}/embed-server/remove-logstash.cli
+
+# Stop embedded server
+stop-embedded-server

@@ -1,0 +1,25 @@
+#$ {jbossHomeName}/bin/jboss-cli.sh --connect --file=remove-logstash.cli
+
+/subsystem=logging/root-logger=ROOT:remove-handler(name=ASYNCGELF)
+/subsystem=logging/async-handler=ASYNCGELF:remove()
+/subsystem=logging/custom-handler=GELF_LOGGER:remove()
+
+
+# csak a GELF_LOGGER:remove() rész marad akkor igy lehet localban debugolni a működést ezzel a configgal
+#/subsystem=logging/custom-handler=GELF_LOGGER/:add(module=biz.paluch.logging,class=biz.paluch.logging.gelf.wildfly.WildFlyGelfLogHandler,properties={ \
+#    enabled=true, \
+#    host=tcp:logstash, \
+#    port=9000, \
+#    version="1.0", \
+#    extractStackTrace=true, \
+#    includeLogMessageParameters=true, \
+#    level="TRACE", \
+#    facility="logstash-gelf", \
+#    timestampPattern="yyyy-MM-dd HH:mm:ss,SSS", \
+#    maximumMessageSize=16000, \
+#    includeFullMdc=true, \
+   # statikus field hozzáadása
+#    additionalFields="K8S_NAMESPACE=${env.K8S_NAMESPACE:unknown},${env.MDC_FIELDS:}", \
+#    additionalFieldTypes="fieldName1=String" \
+#})
+

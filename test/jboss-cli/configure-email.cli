@@ -1,0 +1,46 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=
+
+#set smtpHost=\${wf.smtp.host,env.WF_SMTP_HOST:izolabank-com.mail.protection.outlook.com}
+#set smtpPort=\${wf.smtp.port,env.WF_SMTP_PORT:25}
+#set smtpUsername=\${wf.smtp.username,env.WF_SMTP_USERNAME:testing@izolabank.com}
+#set smtpPassword=\${wf.smtp.password,env.WF_SMTP_PASSWORD:Pr0_acc0unt!}
+#set smtpTls=\${wf.smtp.tls,env.WF_SMTP_TLS:false}
+#set emailFrom=\${wf.email.from,env.WF_EMAIL_FROM:testing@izolabank.com}
+
+set smtpHost=\${wf.smtp.host,env.WF_SMTP_HOST:smtp.gmail.com}
+set smtpPort=\${wf.smtp.port,env.WF_SMTP_PORT:465}
+set smtpUsername=\${wf.smtp.username,env.WF_SMTP_USERNAME:btmsebankingpop@gmail.com}
+set smtpPassword=\${wf.smtp.password,env.WF_SMTP_PASSWORD:urowvxhvmtvvctfx}
+set smtpTls=\${wf.smtp.tls,env.WF_SMTP_TLS:true}
+set smtpSsl=\${wf.smtp.ssl,env.WF_SMTP_SSL:true}
+set smtpAuth=\${wf.smtp.auth,env.WF_SMTP_AUTH:true}
+set emailFrom=\${wf.email.from,env.WF_EMAIL_FROM:btmsebankingpop@gmail.com}
+
+# socket binding for smtp
+/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=mail-smtp-project-default:add( \
+    host=$smtpHost, \
+    port=$smtpPort)
+
+# register project-default mail session
+/subsystem=mail/mail-session=project-default:add( \
+    jndi-name="java:jboss/mail/project-default", \
+    from=$emailFrom)
+
+# connect project-default session to smtp with auth
+/subsystem=mail/mail-session=project-default/server=smtp:add( \
+    outbound-socket-binding-ref=mail-smtp-project-default, \
+    username=$smtpUsername, \
+    password=$smtpPassword, \
+    tls=$smtpTls, \
+    ssl=$smtpSsl)
+
+# register project-default mail session without auth
+/subsystem=mail/mail-session=project-default-no-auth:add( \
+    jndi-name="java:jboss/mail/project-default-no-auth", \
+    from=$emailFrom)
+
+# connect project-default session to smtp without auth
+/subsystem=mail/mail-session=project-default-no-auth/server=smtp:add( \
+    outbound-socket-binding-ref=mail-smtp-project-default, \
+    tls=$smtpTls, \
+    ssl=$smtpSsl)
