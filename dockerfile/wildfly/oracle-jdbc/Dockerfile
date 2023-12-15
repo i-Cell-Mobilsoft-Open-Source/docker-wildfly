@@ -77,5 +77,6 @@ RUN set -x; \
     rm -rf $WILDFLY_HOME/standalone/configuration/standalone_xml_history
     
 ##Default dialect for oracle
-ENV HIBERNATE_DIALECT=org.hibernate.dialect.OracleDialect
+ARG PERSISTENCE_HIBERNATE_DIALECT=org.hibernate.dialect.OracleDialect
+ENV HIBERNATE_DIALECT=$PERSISTENCE_HIBERNATE_DIALECT
 

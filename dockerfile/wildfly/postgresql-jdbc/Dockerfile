@@ -59,4 +59,5 @@ RUN set -x; \
     rm -rf $WILDFLY_HOME/standalone/configuration/standalone_xml_history
 
 ##Default dialect for postgresql
-ENV HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQL95Dialect
+ARG PERSISTENCE_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQL95Dialect
+ENV HIBERNATE_DIALECT=$PERSISTENCE_HIBERNATE_DIALECT
