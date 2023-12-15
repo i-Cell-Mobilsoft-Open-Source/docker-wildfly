@@ -2,4 +2,4 @@
 |LOGGING_HU_ICELLMOBILSOFT_LOGGER_LOGLEVEL |logging.hu.icellmobilsoft.logger.loglevel |ALL  |Global log level for "hu.icellmobilsoft" packages
 |LOGGING_COFFEE_ETCD_LOGGER_LOGLEVEL       |logging.coffee.etcd.logger.loglevel       |INFO |Log level regarding ETCD classes
 |LOGGING_K8S_NAMESPACE                     |-                                         |-    |Value of key `k8s_namespace` in the logged string (log pattern)
-|CONSOLE_LOGGING_ENABLED                   |console.logging.enabled                   |false |Enable plaintext console logging
+|CONSOLE_LOGGING_ENABLED                   |console.logging.enabled                   |true |Enable plaintext console logging

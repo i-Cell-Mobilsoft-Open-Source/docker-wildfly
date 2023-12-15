@@ -1,7 +1,6 @@
 # coming from docker-compose
 ARG BASE_IMAGE
 ARG ARTIFACT_DOWNLOADER_IMAGE
-
 ################################################################################
 # Download .jar
 ################################################################################
@@ -30,9 +29,13 @@ ARG BASE_IMAGE
 ARG POM_GROUP_ID
 ARG POM_ARTIFACT_ID
 ARG POM_VERSION
+
+ENV DEFAULT_PERSISTENCE_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQL95Dialect
+
 LABEL base.image=$BASE_IMAGE
 LABEL postgresql-jdbc.version=$POM_GROUP_ID:$POM_ARTIFACT_ID:$POM_VERSION
 LABEL wildfly.modules=logstash,postgresql-jdbc
+LABEL default-hibernate-dialect=$DEFAULT_PERSISTENCE_HIBERNATE_DIALECT
 
 ARG TMP_DIR=$HOME/tmp
 ARG DOWNLOAD_DIR=$HOME/download
