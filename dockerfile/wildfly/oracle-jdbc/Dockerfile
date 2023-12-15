@@ -47,10 +47,13 @@ ARG POM_OJDBC_VERSION
 ARG POM_ORAI18N_GROUP_ID
 ARG POM_ORAI18N_ARTIFACT_ID
 ARG POM_ORAI18N_VERSION
+
+ENV DEFAULT_PERSISTENCE_HIBERNATE_DIALECT=org.hibernate.dialect.OracleDialect
+
 LABEL base.image=$BASE_IMAGE
 LABEL oracle-jdbc.version=$POM_OJDBC_GROUP_ID:$POM_OJDBC_ARTIFACT_ID:$POM_OJDBC_VERSION,$POM_ORAI18N_GROUP_ID:$POM_ORAI18N_ARTIFACT_ID:$POM_ORAI18N_VERSION
 LABEL wildfly.modules=logstash,oracle-jdbc
-LABEL hibernate-dialect=org.hibernate.dialect.OracleDialect
+LABEL default-hibernate-dialect=$DEFAULT_PERSISTENCE_HIBERNATE_DIALECT
 
 ARG TMP_DIR=$HOME/tmp
 ARG DOWNLOAD_DIR=$HOME/download
@@ -75,7 +78,3 @@ RUN set -x; \
         --properties=$TMP_DIR/wf.properties && \
     rm -rf ${TMP_DIR} && \
     rm -rf $WILDFLY_HOME/standalone/configuration/standalone_xml_history
-    
-##Default dialect for oracle
-ENV DEFAULT_PERSISTENCE_HIBERNATE_DIALECT=org.hibernate.dialect.OracleDialect
-
