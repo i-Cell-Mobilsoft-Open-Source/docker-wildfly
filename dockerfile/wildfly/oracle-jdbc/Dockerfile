@@ -75,8 +75,4 @@ RUN set -x; \
         --properties=$TMP_DIR/wf.properties && \
     rm -rf ${TMP_DIR} && \
     rm -rf $WILDFLY_HOME/standalone/configuration/standalone_xml_history
-    
-##Default dialect for oracle
-ARG PERSISTENCE_HIBERNATE_DIALECT=org.hibernate.dialect.OracleDialect
-ENV HIBERNATE_DIALECT=$PERSISTENCE_HIBERNATE_DIALECT
 

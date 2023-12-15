@@ -57,7 +57,3 @@ RUN set -x; \
         --properties=$TMP_DIR/wf.properties && \
     rm -rf ${TMP_DIR} && \
     rm -rf $WILDFLY_HOME/standalone/configuration/standalone_xml_history
-
-##Default dialect for postgresql
-ARG PERSISTENCE_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQL95Dialect
-ENV HIBERNATE_DIALECT=$PERSISTENCE_HIBERNATE_DIALECT
