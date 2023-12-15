@@ -1,2 +1,2 @@
-|CONSOLE_LOGGING_JSON_ENABLED |console.logging.json.enabled |true | Enable json console logging. 
+|CONSOLE_LOGGING_JSON_ENABLED |console.logging.json.enabled |false | Enable json console logging. 
 |CONSOLE_LOGGING_JSON_FORMATTER_ZONEID |console.logging.json.formatter.zoneid |UTC |Default zoneid value for formatter datetime pattern

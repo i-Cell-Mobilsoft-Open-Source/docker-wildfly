@@ -12,5 +12,5 @@ to keep projects and their builds on the same basis.
 
 include::dockerfile.adoc[leveloffset=+1]
 include::jmx.adoc[leveloffset=+1]
-include::release-notes/v1.0.0.adoc[leveloffset=+2]
+include::release-notes/v2.0.0.adoc[leveloffset=+2]
 
