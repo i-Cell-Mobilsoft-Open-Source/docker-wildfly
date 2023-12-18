@@ -36,6 +36,15 @@ not counting updates, it is 1:1 compatible with version 1.3.0.
 ** (new with old value) `LOGSTASH_BLOCKING_MODE` default `DISCARD`
 ** (new with old value) `LOGSTASH_QUEUE_LENGTH` default `50000`
 
+* Debugging: The `--debug *:8787` option doesn't need anymore in the `CMD exec` which you can ignore in the local Dockerfile mostly. The debug mode can be controlled by the `DEBUG` environment variable which is false by default. The default port is `*:8787` but you can override it with the `DEBUG_PORT` environment variable.
+
+[WARNING]
+====
+Don't release docker images with DEBUG enabled into production environments!
+
+====
+
+ 
 .What's new
 * DEFAULT_PERSISTENCE_HIBERNATE_DIALECT variable added to the jdbc images to use in the local Dockerfiles: 
 - wildfly-mp-*-oracle-jdbc image = `org.hibernate.dialect.OracleDialect`
