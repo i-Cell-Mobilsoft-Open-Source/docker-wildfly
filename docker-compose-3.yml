@@ -51,7 +51,7 @@ services:
       context: .
       dockerfile: dockerfile/wildfly/postgresql-jdbc/Dockerfile
       args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA_MP
         ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
         POM_GROUP_ID: $POSTGRES_JDBC_POM_GROUP_ID
         POM_ARTIFACT_ID: $POSTGRES_JDBC_POM_ARTIFACT_ID
