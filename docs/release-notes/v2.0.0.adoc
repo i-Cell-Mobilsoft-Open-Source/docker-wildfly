@@ -36,7 +36,7 @@ not counting updates, it is 1:1 compatible with version 1.3.0.
 ** (new with old value) `LOGSTASH_BLOCKING_MODE` default `DISCARD`
 ** (new with old value) `LOGSTASH_QUEUE_LENGTH` default `50000`
 
-* Debugging: The `--debug *:8787` option doesn't need anymore in the `CMD exec` which you can ignore in the local Dockerfile mostly. The debug mode can be controlled by the `DEBUG` environment variable which is false by default. The default port is `*:8787` but you can override it with the `DEBUG_PORT` environment variable.
+* Debugging: The `--debug &ast;:8787` option doesn't need anymore in the `CMD exec` which you can ignore in the local Dockerfile mostly. The debug mode can be controlled by the `DEBUG` environment variable which is false by default. The default port is `&ast;:8787` but you can override it with the `DEBUG_PORT` environment variable.
 
 [WARNING]
 ====
@@ -53,7 +53,8 @@ Don't release docker images with DEBUG enabled into production environments!
 [NOTE]
 .project-local.Dockerfile snippet
 ====
-#you can override dialect with `PERSISTENCE_HIBERNATE_DIALECT` environment variable
+You can override default dialect with `PERSISTENCE_HIBERNATE_DIALECT` environment variable but you dont need to set it in the `docker-compose.yml` file mostly.
+
 ARG PERSISTENCE_HIBERNATE_DIALECT=$DEFAULT_PERSISTENCE_HIBERNATE_DIALECT
 ENV HIBERNATE_DIALECT=$PERSISTENCE_HIBERNATE_DIALECT
 ====
