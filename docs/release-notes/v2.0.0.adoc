@@ -39,7 +39,7 @@ not counting updates, it is 1:1 compatible with version 1.3.0.
 .What's new
 * DEFAULT_PERSISTENCE_HIBERNATE_DIALECT variable added to the jdbc images to use in the local Dockerfiles: 
 - wildfly-mp-*-oracle-jdbc image = `org.hibernate.dialect.OracleDialect`
-- wildfly-mp-*-postgresql-jdbc image = `org.hibernate.dialect.PostgreSQL95Dialect`
+- wildfly-mp-*-postgresql-jdbc image = `org.hibernate.dialect.PostgreSQLDialect`
 
 [NOTE]
 .project-local.Dockerfile snippet
