@@ -48,7 +48,7 @@ Don't release docker images with DEBUG enabled into production environments!
 .What's new
 * DEFAULT_PERSISTENCE_HIBERNATE_DIALECT variable added to the jdbc images to use in the local Dockerfiles: 
 - wildfly-mp-*-oracle-jdbc image = `org.hibernate.dialect.OracleDialect`
-- wildfly-mp-*-postgresql-jdbc image = `org.hibernate.dialect.PostgreSQL95Dialect`
+- wildfly-mp-*-postgresql-jdbc image = `org.hibernate.dialect.PostgreSQLDialect`
 
 [NOTE]
 .project-local.Dockerfile snippet
