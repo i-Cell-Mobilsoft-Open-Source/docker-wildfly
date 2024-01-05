@@ -1,0 +1,13 @@
+#$ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-micrometer.cli
+# https://docs.wildfly.org/30/wildscribe/subsystem/micrometer/index.html
+# https://docs.wildfly.org/30/Admin_Guide.html#Micrometer_Metrics
+
+# __don't use__ space at '=' sign!
+set micrometerEndpoint=\${env.MICROMETER_ENDPOINT,micrometer.endpoint:http://opentelemetry-collector:4318/v1/metrics}
+set micrometerStep=\${env.MICROMETER_STEP,micrometer.step:60}
+
+# The URL to which metrics will be published.
+/subsystem=micrometer:write-attribute(name=endpoint, value=$micrometerEndpoint)
+
+# The step size, or reporting frequency, to use (in seconds).
+/subsystem=micrometer:write-attribute(name=step, value=$micrometerStep)

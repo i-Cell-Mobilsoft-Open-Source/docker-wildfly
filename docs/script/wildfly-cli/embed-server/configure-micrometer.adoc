@@ -1,0 +1,2 @@
+|MICROMETER_ENDPOINT |micrometer.endpoint |http://opentelemetry-collector:4318/v1/metrics |The URL to which metrics will be published.
+|MICROMETER_STEP |micrometer.step |60 | The step size, or reporting frequency, to use (in seconds).

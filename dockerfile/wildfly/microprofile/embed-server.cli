@@ -8,21 +8,42 @@ embed-server --std-out=echo
 run-batch --file=${TMP_DIR}/embed-server/configure-managed-executor.cli
 run-batch --file=${TMP_DIR}/embed-server/configure-undertow.cli
 
-#####Microprofile configs#####
-run-batch --file=${TMP_DIR}/embed-server/configure-opentracing.cli
-
-#NOTE test flow if (outcome!=success) of /extension=org.wildfly.extension.microprofile.metrics-smallrye:add
-# add smallrye extension with exception handling
+#####Microprofile telemetry#####
+# add telemetry with exception handling
 try
-/extension=org.wildfly.extension.microprofile.metrics-smallrye:add
-/subsystem=microprofile-metrics-smallrye:add
+/extension=org.wildfly.extension.opentelemetry:add
+/extension=org.wildfly.extension.microprofile.telemetry:add
+/subsystem=opentelemetry:add
+/subsystem=microprofile-telemetry:add
 catch
-echo "Metrics extension already activated."
+echo "Opentelemetry extension already activated."
 finally
 end-try
 
-#metrics config
-run-batch --file=${TMP_DIR}/embed-server/configure-metrics.cli
+run-batch --file=${TMP_DIR}/embed-server/configure-opentelemetry.cli
+
+#####Micrometer#####
+# add micrometer with exception handling
+try
+/extension=org.wildfly.extension.micrometer:add
+/subsystem=micrometer:add
+catch
+echo "Micrometer extension already activated."
+finally
+end-try
+
+run-batch --file=${TMP_DIR}/embed-server/configure-micrometer.cli
+
+# try remove unsupported metrics
+# https://docs.wildfly.org/30/Admin_Guide.html#MicroProfile_Metrics_SmallRye
+# https://docs.wildfly.org/30/Admin_Guide.html#micrometer-required-extension-metrics
+try
+/subsystem=metrics:remove()
+/extension=org.wildfly.extension.metrics:remove()
+catch
+echo "WildFly Metrics extension already removed."
+finally
+end-try
 
 # add openapi with exception handling
 try

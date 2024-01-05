@@ -1,0 +1,22 @@
+= v3.0.0
+
+.What's new
+
+* Bump Wildfly 27.0.1 -> 30.0.1
+
+.Changes compared to previous version
+
+* Replace https://github.com/eclipse/microprofile-opentracing[Microprofile Opentracing] with https://github.com/eclipse/microprofile-telemetry[Microprofile Telemetry] https://download.eclipse.org/microprofile/microprofile-telemetry-1.1/tracing/microprofile-telemetry-tracing-spec-1.1.html[1.1 Specification] 
+* Replace https://github.com/eclipse/microprofile-metrics[Microprofile Metrics] with https://micrometer.io/[Micrometer] 
+* Environment changes:
+** (removed) `OPENTRACING_JAEGER_AGENT_HOST`
+** (removed) `OPENTRACING_JAEGER_AGENT_PORT`
+** (removed) `OPENTRACING_JAEGER_AGENT_SAMPLER_PORT`
+** (removed) `OPENTRACING_JAEGER_PROPAGATION`
+** (new) `MICROMETER_ENDPOINT` default: `http://opentelemetry-collector:4318/v1/metrics`
+** (new) `MICROMETER_STEP` default: `60`
+** (new) `OPENTELEMETRY_BATCH_DELAY` default: `5000`
+** (new) `OPENTELEMETRY_ENDPOINT` default: `http://localhost:14250`
+** (new) `OPENTELEMETRY_RATIO` default: `0.01`
+** (new) `OPENTELEMETRY_SAMPLER_TYPE` default: `ratio`
+** (new) `OPENTELEMETRY_EXPORTER_TYPE` default: `jaeger`
