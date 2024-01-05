@@ -1,0 +1,53 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-opentelemetry.cli
+# opentracing configuration
+# https://docs.wildfly.org/30/wildscribe/subsystem/opentelemetry/index.html
+# https://docs.wildfly.org/30/Admin_Guide.html#Observability_Tracing
+
+# __don't use__ space at '=' sign!
+set opentelemetryServiceName=\${env.OPENTELEMETRY_SERVICE_NAME,opentelemetry.service-name:ROOT.war}
+set opentelemetryExporterType=\${env.OPENTELEMETRY_EXPORTER_TYPE,opentelemetry.exporter-type:jaeger}
+set opentelemetryExporterEndpoint=\${env.OPENTELEMETRY_EXPORTER_ENDPOINT,opentelemetry.exporter.endpoint:http://localhost:14250}
+set opentelemetrySpanProcessorType=\${env.OPENTELEMETRY_SPAN_PROCESSOR_TYPE,opentelemetry.span-processor.type:batch}
+set opentelemetrySpanProcessorBatchDelay=\${env.OPENTELEMETRY_SPAN_PROCESSOR_BATCH_DELAY,opentelemetry.span-processor.batch-delay:5000}
+set opentelemetrySpanProcessorMaxQueueSize=\${env.OPENTELEMETRY_SPAN_PROCESSOR_MAX_QUEUE_SIZE,opentelemetry.span-processor.max-queue-size:2048}
+set opentelemetrySpanProcessorMaxExportBatchSize=\${env.OPENTELEMETRY_SPAN_PROCESSOR_MAX_EXPORT_BATCH_SIZE,opentelemetry.span-processor.max-export-batch-size:512}
+set opentelemetrySpanProcessorExportTimeout=\${env.OPENTELEMETRY_SPAN_PROCESSOR_EXPORT_TIMEOUT,opentelemetry.span-processor.export-timeout:30000}
+set opentelemetrySamplerRatio=\${env.OPENTELEMETRY_SAMPLER_RATIO,opentelemetry.sampler.ratio:0.01}
+set opentelemetrySamplerType=\${env.OPENTELEMETRY_SAMPLER_TYPE,opentelemetry.sampler.type:ratio}
+
+# Service name reported to the trace collector
+/subsystem=opentelemetry:write-attribute(name=service-name, value=$opentelemetryServiceName)
+
+# The URL for the exporter endpoint.
+/subsystem=opentelemetry:write-attribute(name=endpoint, value=$opentelemetryExporterEndpoint)
+
+# The name of the exporter to use
+# jaeger
+# otlp
+/subsystem=opentelemetry:write-attribute(name=exporter-type, value=$opentelemetryExporterType)
+
+# The type of span processor to use.
+# batch: The default processor, which sends traces in batches as configured via the remaining attributes
+# simple: Traces are pushed to the exporter as they finish.
+/subsystem=opentelemetry:write-attribute(name=span-processor-type, value=$opentelemetrySpanProcessorType)
+
+# The amount of time, in milliseconds, to wait before traces are published (default: 5000)
+/subsystem=opentelemetry:write-attribute(name=batch-delay, value=$opentelemetrySpanProcessorBatchDelay)
+
+# The maximum size of the queue before traces are dropped (default: 2048)
+/subsystem=opentelemetry:write-attribute(name=max-queue-size, value=$opentelemetrySpanProcessorMaxQueueSize)
+
+# The maximum number of traces that are published in each batch, which must be smaller or equal to `max-queue-size` (default: 512)
+/subsystem=opentelemetry:write-attribute(name=max-export-batch-size, value=$opentelemetrySpanProcessorMaxExportBatchSize)
+
+# The maximum amount of time in milliseconds to allow for an export to complete before being cancelled (default: 30000)
+/subsystem=opentelemetry:write-attribute(name=export-timeout, value=$opentelemetrySpanProcessorExportTimeout)
+
+# The value used to configure the ratio sampler, which must be within [0.0, 1.0].For example, if 1 trace in 10,000 is to be exported, this value would be 0.0001.
+/subsystem=opentelemetry:write-attribute(name=ratio, value=$opentelemetrySamplerRatio)
+
+# The type of sampler to use
+# on: Always on (all traces are recorded)
+# off: Always off (no traces are recorded)
+# ratio: Return a ratio of the traces (e.g., 1 trace in 10000).
+/subsystem=opentelemetry:write-attribute(name=sampler-type, value=$opentelemetrySamplerType)

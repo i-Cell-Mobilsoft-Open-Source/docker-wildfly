@@ -1,1 +1,0 @@
-|METRICS_PREFIX |wildfly.metrics.prefix |wildfly |Default prefix for custom (microprofile-metrics-smallrye) metrics
