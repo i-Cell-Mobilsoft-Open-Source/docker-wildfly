@@ -15,8 +15,13 @@
 ** (removed) `OPENTRACING_JAEGER_PROPAGATION`
 ** (new) `MICROMETER_ENDPOINT` default: `http://opentelemetry-collector:4318/v1/metrics`
 ** (new) `MICROMETER_STEP` default: `60`
-** (new) `OPENTELEMETRY_BATCH_DELAY` default: `5000`
-** (new) `OPENTELEMETRY_ENDPOINT` default: `http://localhost:14250`
-** (new) `OPENTELEMETRY_RATIO` default: `0.01`
-** (new) `OPENTELEMETRY_SAMPLER_TYPE` default: `ratio`
+** (new) `OPENTELEMETRY_SERVICE_NAME` default: `ROOT.war`
 ** (new) `OPENTELEMETRY_EXPORTER_TYPE` default: `jaeger`
+** (new) `OPENTELEMETRY_EXPORTER_ENDPOINT` default: `http://localhost:14250`
+** (new) `OPENTELEMETRY_SPAN_PROCESSOR_TYPE` default: `batch`
+** (new) `OPENTELEMETRY_SPAN_PROCESSOR_BATCH_DELAY` default: `5000`
+** (new) `OPENTELEMETRY_SPAN_PROCESSOR_MAX_QUEUE_SIZE` default: `2048`
+** (new) `OPENTELEMETRY_SPAN_PROCESSOR_MAX_EXPORT_BATCH_SIZE` default: `512`
+** (new) `OPENTELEMETRY_SPAN_PROCESSOR_EXPORT_TIMEOUT` default: `30000`
+** (new) `OPENTELEMETRY_SAMPLER_RATIO` default: `0.01`
+** (new) `OPENTELEMETRY_SAMPLER_TYPE` default: `ratio`
