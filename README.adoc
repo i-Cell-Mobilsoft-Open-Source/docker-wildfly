@@ -21,9 +21,10 @@ The docker images contain the following components:
 .Compatibility
 [options="header"]
 |===
-|Version  |Jakarta EE |Wildfly
+|Version  |Jakarta EE |Java |Wildfly
 //----------------------
-|1.0.x   |Jakarta EE 10  |Widlfy 27.0.1.Final
+|1.0.x (internal only)|Jakarta EE 10 |17 |Widlfy 27.0.1.Final
+|2.0.x (first public) |Jakarta EE 10 |17 |Widlfy 27.0.1.Final
 |===
 
 The repository is a collection of wildfly docker images used in icellmobilsoft,
@@ -46,9 +47,9 @@ All you need to know is the following command:
 
 [source,bash]
 ----
-docker-compose -f <PATH>/docker-base/docker-compose-1.yml build
-docker-compose -f <PATH>/docker-base/docker-compose-2.yml build
-docker-compose -f <PATH>/docker-base/docker-compose-3.yml build
+docker compose -f <PATH>/docker-base/docker-compose-1.yml build
+docker compose -f <PATH>/docker-base/docker-compose-2.yml build
+docker compose -f <PATH>/docker-base/docker-compose-3.yml build
 ----
 [IMPORTANT]
 ====
