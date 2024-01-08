@@ -114,7 +114,11 @@ Configuration options are inherited from the parent
 include::table/config-keys.start.adoc[]
 include::script/wildfly-cli/embed-server/configure-property-replacement.adoc[]
 include::script/wildfly-cli/embed-server/add-oracle-datasource.adoc[]
+|DEFAULT_PERSISTENCE_HIBERNATE_DIALECT|-|org.hibernate.dialect.OracleDialect
+|Implementation constant value for usage in persistence.xml file
 include::table/config-keys.end.adoc[]
+
+Example for DEFAULT_PERSISTENCE_HIBERNATE_DIALECT usage: <<persistence-xml-example,persistence.xml>>
 
 [[wildfly-postgresql-jdbc]]
 == wildfly/postgresql-jdbc
@@ -133,7 +137,11 @@ Configuration options are inherited from the parent
 include::table/config-keys.start.adoc[]
 include::script/wildfly-cli/embed-server/configure-property-replacement.adoc[]
 include::script/wildfly-cli/embed-server/add-postgresql-datasource.adoc[]
+|DEFAULT_PERSISTENCE_HIBERNATE_DIALECT|-|org.hibernate.dialect.PostgreSQLDialect
+|Implementation constant value for usage in persistence.xml file
 include::table/config-keys.end.adoc[]
+
+Example for DEFAULT_PERSISTENCE_HIBERNATE_DIALECT usage: <<persistence-xml-example,persistence.xml>>
 
 [[wildfly-ibm-mq]]
 == wildfly/ibm-mq
