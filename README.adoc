@@ -47,9 +47,9 @@ All you need to know is the following command:
 
 [source,bash]
 ----
-docker compose -f <PATH>/docker-base/docker-compose-1.yml build
-docker compose -f <PATH>/docker-base/docker-compose-2.yml build
-docker compose -f <PATH>/docker-base/docker-compose-3.yml build
+docker compose -f <PATH>/docker-compose-1.yml build
+docker compose -f <PATH>/docker-compose-2.yml build
+docker compose -f <PATH>/docker-compose-3.yml build
 ----
 [IMPORTANT]
 ====
