@@ -1,0 +1,4 @@
+= v2.1.0
+
+.What's new
+* ironjacamar auto commit disabled when stopping container

@@ -88,9 +88,9 @@ RUN set -x; \
 
 COPY --from=galleon --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP $WILDFLY_HOME $WILDFLY_HOME
 
-RUN echo "# Icellmobilsoft Java17 custom packages" >> $WILDFLY_HOME/bin/standalone.conf && \
+RUN echo "# ironjacamar conf and Icellmobilsoft Java17 custom packages" >> $WILDFLY_HOME/bin/standalone.conf && \
     # we need the additional package due to java17
-    ADDITIONAL_JPMS="JAVA_OPTS=\"\$JAVA_OPTS --add-opens=java.base/java.net=ALL-UNNAMED\"" && \
+    ADDITIONAL_JPMS="JAVA_OPTS=\"\$JAVA_OPTS -Dironjacamar.jdbc.setautocommitoncleanup=false --add-opens=java.base/java.net=ALL-UNNAMED\"" && \
     echo "$ADDITIONAL_JPMS" >> $WILDFLY_HOME/bin/standalone.conf
 
 ## add logstash module + add 4 handlers
