@@ -2,3 +2,4 @@
 
 .What's new
 * ironjacamar auto commit disabled when stopping container
+* set the default garbage collector to g1 gc
