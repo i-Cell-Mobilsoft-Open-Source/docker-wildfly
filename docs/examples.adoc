@@ -21,3 +21,18 @@
     </persistence-unit>
 </persistence>
 ----
+
+[[java-gc-example]]
+.docker-compose.yml
+[source,yaml]
+----
+...
+    environment:
+      DEBUG: true
+      #different gc
+      JAVA_GC: '-XX:+UseSerialGC'
+      #JVM default gc with empty string:
+      #JAVA_GC: ''
+    ports:
+...
+----

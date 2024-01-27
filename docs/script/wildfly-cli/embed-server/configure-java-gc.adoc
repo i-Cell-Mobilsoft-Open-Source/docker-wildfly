@@ -1,0 +1,1 @@
+|JAVA_GC |-| -XX:+UseG1GC  | Set g1 garbage collector for default gc. You can change the gc via filling with different value: '-XX:+UseConcMarkSweepGC' Or set to empty string for JVM default gc. Example: <<java-gc-example,docker-compose.yml>>

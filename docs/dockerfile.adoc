@@ -70,6 +70,7 @@ include::script/wildfly-cli/embed-server/configure-logging.adoc[]
 include::script/wildfly-cli/embed-server/configure-logging-json.adoc[]
 include::script/wildfly-cli/embed-server/configure-logging-file.adoc[]
 include::script/wildfly-cli/embed-server/configure-logstash.adoc[]
+include::script/wildfly-cli/embed-server/configure-java-gc.adoc[]
 include::table/config-keys.end.adoc[]
 
 [[wildfly-microprofile]]
