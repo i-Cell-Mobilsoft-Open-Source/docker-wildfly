@@ -55,6 +55,7 @@ ARG WILDFLY_HOME
 ARG DOCKER_IMAGE_GALLEON
 ARG GALLEON_LAYERS
 ARG DEBUG_PORT="*:8787"
+ARG JAVA_GC="-XX:+UseG1GC"
 
 ENV WILDFLY_VERSION=$WILDFLY_VERSION
 ENV WILDFLY_HOME=$HOME/wildfly
@@ -63,6 +64,7 @@ ENV CONFIG_DIR=$HOME/config
 ENV WILDFLY_PROPERTIES_FILE=$CONFIG_DIR/wildfly.properties
 ENV LAUNCH_JBOSS_IN_BACKGROUND=true
 ENV DEBUG_PORT=$DEBUG_PORT
+ENV JAVA_GC=$JAVA_GC
 
 ARG POM_GROUP_ID
 ARG POM_ARTIFACT_ID
@@ -88,9 +90,9 @@ RUN set -x; \
 
 COPY --from=galleon --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP $WILDFLY_HOME $WILDFLY_HOME
 
-RUN echo "# ironjacamar conf and Icellmobilsoft Java17 custom packages" >> $WILDFLY_HOME/bin/standalone.conf && \
+RUN echo "# use g1 gc, ironjacamar conf and Icellmobilsoft, Java17 custom packages" >> $WILDFLY_HOME/bin/standalone.conf && \
     # we need the additional package due to java17
-    ADDITIONAL_JPMS="JAVA_OPTS=\"\$JAVA_OPTS -Dironjacamar.jdbc.setautocommitoncleanup=false --add-opens=java.base/java.net=ALL-UNNAMED\"" && \
+    ADDITIONAL_JPMS="JAVA_OPTS=\"\$JAVA_OPTS \$JAVA_GC -Dironjacamar.jdbc.setautocommitoncleanup=false --add-opens=java.base/java.net=ALL-UNNAMED\"" && \
     echo "$ADDITIONAL_JPMS" >> $WILDFLY_HOME/bin/standalone.conf
 
 ## add logstash module + add 4 handlers
