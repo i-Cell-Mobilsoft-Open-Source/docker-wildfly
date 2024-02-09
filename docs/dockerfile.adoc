@@ -74,7 +74,7 @@ include::script/wildfly-cli/embed-server/configure-java-gc.adoc[]
 include::table/config-keys.end.adoc[]
 
 [[wildfly-microprofile]]
-=== wildfly/microprofile
+== wildfly/microprofile
 Expands the base image created by <<wildfly-common,wildfly/common>>
 with microprofile, executor and other config.
 This is necessary because wildfly builds the standalone.xml differently depending on the galleon layer.
@@ -92,8 +92,8 @@ Configuration options are inherited from the parent
 
 include::table/config-keys.start.adoc[]
 include::script/wildfly-cli/embed-server/configure-managed-executor.adoc[]
-include::script/wildfly-cli/embed-server/configure-opentracing.adoc[]
-include::script/wildfly-cli/embed-server/configure-metrics.adoc[]
+include::script/wildfly-cli/embed-server/configure-opentelemetry.adoc[]
+include::script/wildfly-cli/embed-server/configure-micrometer.adoc[]
 include::script/wildfly-cli/embed-server/configure-health.adoc[]
 include::script/wildfly-cli/embed-server/configure-undertow.adoc[]
 include::table/config-keys.end.adoc[]

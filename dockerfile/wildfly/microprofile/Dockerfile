@@ -17,8 +17,8 @@ ARG DOWNLOAD_DIR=$HOME/download
 
 COPY --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP \
     dockerfile/script/wildfly-cli/embed-server/configure-managed-executor.cli \
-    dockerfile/script/wildfly-cli/embed-server/configure-opentracing.cli \
-    dockerfile/script/wildfly-cli/embed-server/configure-metrics.cli \
+    dockerfile/script/wildfly-cli/embed-server/configure-opentelemetry.cli \
+    dockerfile/script/wildfly-cli/embed-server/configure-micrometer.cli \
     dockerfile/script/wildfly-cli/embed-server/configure-undertow.cli \
     dockerfile/script/wildfly-cli/embed-server/configure-reactive-messaging.cli \
     dockerfile/wildfly/microprofile/embed-server.cli \
