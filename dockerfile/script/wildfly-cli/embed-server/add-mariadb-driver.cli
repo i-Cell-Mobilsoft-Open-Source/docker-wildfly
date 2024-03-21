@@ -1,0 +1,4 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=add-mariadb-driver.cli
+# set up the mariadb driver
+
+/subsystem=datasources/jdbc-driver=mariadb:add(driver-module-name=org.mariadb, driver-class-name=org.mariadb.jdbc.Driver)

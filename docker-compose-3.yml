@@ -86,3 +86,28 @@ services:
     depends_on:
       wildfly-mp-full-oracle-jdbc-release: 
         condition: service_completed_successfully
+  # mariadb-jdbc
+  wildfly-mp-jpa-mariadb-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/mariadb-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_MS_JPA_MP
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $MARIADB_JDBC_POM_GROUP_ID
+        POM_ARTIFACT_ID: $MARIADB_JDBC_POM_ARTIFACT_ID
+        POM_VERSION: $MARIADB_JDBC_POM_VERSION
+        POM_EXTENSION: $MARIADB_JDBC_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_MP_JPA_MARIADB_JDBC
+  wildfly-mp-full-mariadb-jdbc-release:
+    build:
+      context: .
+      dockerfile: dockerfile/wildfly/mariadb-jdbc/Dockerfile
+      args:
+        BASE_IMAGE: $DOCKER_IMAGE_WF_FULL_MP
+        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
+        POM_GROUP_ID: $MARIADB_JDBC_POM_GROUP_ID
+        POM_ARTIFACT_ID: $MARIADB_JDBC_POM_ARTIFACT_ID
+        POM_VERSION: $MARIADB_JDBC_POM_VERSION
+        POM_EXTENSION: $MARIADB_JDBC_POM_EXTENSION
+    image: $DOCKER_IMAGE_WF_MP_FULL_MARIADB_JDBC

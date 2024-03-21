@@ -25,3 +25,11 @@
 ** (new) `OPENTELEMETRY_SPAN_PROCESSOR_EXPORT_TIMEOUT` default: `30000`
 ** (new) `OPENTELEMETRY_SAMPLER_RATIO` default: `0.01`
 ** (new) `OPENTELEMETRY_SAMPLER_TYPE` default: `ratio`
+
+* Add new wildfly jpa base images with mariaDb support, see <<wildfly-mariadb-jdbc, wildfly/mariadb-jdbc>>
+** icellmobilsoft/wildfly-mp-jpa-mariadb-jdbc
+** icellmobilsoft/wildfly-mp-full-mariadb-jdbc
+
+NOTE: See configuration at <<wildfly-mariadb-jdbc-configtable,here>>
+
+
