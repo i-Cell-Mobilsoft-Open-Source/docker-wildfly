@@ -1,0 +1,7 @@
+|MARIADB_DS_SERVICENAME |mariadb.ds.servicename |icellmobilsoft |Service name for datasource, postfixed with DS automatically -> icellmobilsoftDS by default
+|MARIADB_DS_CONNECTION_URL |mariadb.ds.connection.url |- |MariaDb DB connection url
+|MARIADB_DS_USERNAME |mariadb.ds.username |- |MariaDb DB connection user
+|MARIADB_DS_PASSWORD |mariadb.ds.password |- |MariaDb DB connection password
+|MARIADB_DS_NEW_CONNECTION_SQL |mariadb.ds.new-connection-sql |SELECT SQL_NO_CACHE 1 |MariaDb DB new connection sql
+|MARIADB_DS_MIN_POOL_SIZE |mariadb.ds.min-pool-size |1 |MariaDb DB connection min pool size
+|MARIADB_DS_MAX_POOL_SIZE |mariadb.ds.max-pool-size |60 |MariaDb DB connection max pool size
