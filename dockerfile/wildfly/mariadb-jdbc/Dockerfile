@@ -50,7 +50,7 @@ COPY --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP \
     $TMP_DIR/embed-server/
 
 RUN set -x; \
-    echo "MARIADB_JDBC_RESOURCES=$TMP_DIR/mariadb.jar" >> $TMP_DIR/wf.properties; \
+    echo "MARIADB_JDBC_RESOURCES=$TMP_DIR/mariadb-java-client.jar" >> $TMP_DIR/wf.properties; \
     echo "TMP_DIR=$TMP_DIR" >> $TMP_DIR/wf.properties && \
     $WILDFLY_HOME/bin/jboss-cli.sh \
         --file=$TMP_DIR/module/mariadb-jdbc.cli \
