@@ -13,7 +13,7 @@ The project can be divided into several parts, completing each other.
 ====
 The docker images contain the following components:
 
-* Wildfly: 27.x (Jakarta EE10)
+* Wildfly: 30.0.x (Jakarta EE10)
 * Java: 17.x
 * Base image version: 1.4.x
 ====
