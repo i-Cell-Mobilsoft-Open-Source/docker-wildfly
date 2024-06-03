@@ -1,0 +1,7 @@
+= v3.1.0
+
+.Changes compared to previous version
+
+* Upgrade Oracle JDBC version from `23.3` to `23.4`
+
+
