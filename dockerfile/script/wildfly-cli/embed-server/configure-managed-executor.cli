@@ -7,5 +7,5 @@ set coreThreads=\${env.MANAGED_EXECUTOR_SERVICE_CORE_THREADS,managed-executor-se
 
 /subsystem=ee/managed-executor-service=default/:write-attribute(name=core-threads,value=$coreThreads)
 
-#Add separate executor services for gRPC
+#Add separate executor service for gRPC threads
 /subsystem=ee/managed-executor-service=grpc:add(jndi-name=java:jboss/ee/concurrency/executor/grpc,context-service=default,hung-task-threshold=60000,core-threads=50,max-threads=60,keepalive-time=5000)
