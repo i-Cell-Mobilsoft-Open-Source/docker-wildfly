@@ -1,1 +1,2 @@
-|MANAGED_EXECUTOR_SERVICE_CORE_THREADS |managed-executor-service.core-thread |16 | Maximum number of Wildfly managed executors. (If it was not configured, t would be dynamic - [number of cpu cores] x 2)   
+|MANAGED_EXECUTOR_SERVICE_CORE_THREADS |managed-executor-service.core-thread |16 | Minimum number of Wildfly managed executors. (If it was not configured, it would be dynamic - [number of cpu cores] x 2)
+|MANAGED_EXECUTOR_SERVICE_GRPC_CORE_THREADS |managed-executor-service.grpc.core-thread |16 | Minimum number of Wildfly managed executors for gRPC service calls. (If it was not configured, it would be dynamic - [number of cpu cores] x 2)

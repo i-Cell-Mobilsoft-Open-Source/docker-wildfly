@@ -86,6 +86,8 @@ In this case we create these images from it:
 * *icellmobilsoft/wildfly-mp-jpa:${VERSION}* - Add jpa layer to the microservice image above
 * *icellmobilsoft/wildfly-mp-full:${VERSION}* - Full wildfly with all existing modules + microprofile configs
 
+All images above contain a separate managed-executor-service definition (java:jboss/ee/concurrency/executor/grpc) for gRPC calls and the core threads are configurable as shown below.
+
 [[wildfly-microprofile-configtable]]
 Configuration options are inherited from the parent
 <<wildfly-common-configtable,wildfly/common>> image and supplemented with the following:

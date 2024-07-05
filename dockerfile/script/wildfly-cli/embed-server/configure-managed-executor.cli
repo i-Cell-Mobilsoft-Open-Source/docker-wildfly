@@ -1,8 +1,12 @@
 #$ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-managed-executor
 #/subsystem=ee/managed-executor-service=default:remove
-#/subsystem=ee/managed-executor-service=default:add(jndi-name=java:jboss/ee/concurrency/executor/default,context-service=default,hung-task-threshold=60000,core-threads=50,max-threads=60,keepalive-time=5000)
+#/subsystem=ee/managed-executor-service=default:add(jndi-name=java:jboss/ee/concurrency/executor/default,context-service=default,hung-task-termination-period=0,hung-task-threshold=60000,core-threads=50,keepalive-time=5000)
 
 #The minimum number of threads to be used by the executor or 16 by default. (If left undefined the default core-size is calculated based on the number of processors)
 set coreThreads=\${env.MANAGED_EXECUTOR_SERVICE_CORE_THREADS,managed-executor-service.core-threads:16}
 
 /subsystem=ee/managed-executor-service=default/:write-attribute(name=core-threads,value=$coreThreads)
+
+#Add separate executor service for gRPC threads
+set coreThreadsGrpc=\${env.MANAGED_EXECUTOR_SERVICE_GRPC_CORE_THREADS,managed-executor-service.grpc.core-threads:16}
+/subsystem=ee/managed-executor-service=grpc:add(jndi-name=java:jboss/ee/concurrency/executor/grpc,context-service=default,hung-task-termination-period=0,hung-task-threshold=60000,core-threads=$coreThreadsGrpc,keepalive-time=5000)
