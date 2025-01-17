@@ -4,5 +4,8 @@
 
 * Upgrade Oracle JDBC version from `23.3` to `23.4`
 * Separate managed-executor-service (java:jboss/ee/concurrency/executor/grpc) for gRPC threads
-
+* Opentelemetry default otlp exporter type, jaeger is not supported
+* galleon 6+ missing user home workaround
+* base image upgrade
+* WildFly 34 upgrade
 
