@@ -19,4 +19,5 @@ include::release-notes/v2.0.0.adoc[leveloffset=+2]
 include::release-notes/v2.0.1.adoc[leveloffset=+2]
 include::release-notes/v3.0.0.adoc[leveloffset=+2]
 include::release-notes/v3.0.1.adoc[leveloffset=+2]
+include::release-notes/v4.0.0.adoc[leveloffset=+2]
 

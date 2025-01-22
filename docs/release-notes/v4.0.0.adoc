@@ -1,0 +1,8 @@
+= v4.0.0
+
+.Changes compared to previous version
+
+* Opentelemetry default otlp exporter type, jaeger is not supported
+* galleon 6+ missing user home workaround
+* base image upgrade 1.5.0
+* WildFly 34 upgrade
