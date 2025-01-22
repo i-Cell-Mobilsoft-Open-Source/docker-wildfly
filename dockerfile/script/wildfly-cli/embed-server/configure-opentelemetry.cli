@@ -5,7 +5,7 @@
 
 # __don't use__ space at '=' sign!
 set opentelemetryServiceName=\${env.OPENTELEMETRY_SERVICE_NAME,opentelemetry.service-name:ROOT.war}
-set opentelemetryExporterType=\${env.OPENTELEMETRY_EXPORTER_TYPE,opentelemetry.exporter-type:jaeger}
+set opentelemetryExporterType=\${env.OPENTELEMETRY_EXPORTER_TYPE,opentelemetry.exporter-type:otlp}
 set opentelemetryExporterEndpoint=\${env.OPENTELEMETRY_EXPORTER_ENDPOINT,opentelemetry.exporter.endpoint:http://localhost:14250}
 set opentelemetrySpanProcessorType=\${env.OPENTELEMETRY_SPAN_PROCESSOR_TYPE,opentelemetry.span-processor.type:batch}
 set opentelemetrySpanProcessorBatchDelay=\${env.OPENTELEMETRY_SPAN_PROCESSOR_BATCH_DELAY,opentelemetry.span-processor.batch-delay:5000}
