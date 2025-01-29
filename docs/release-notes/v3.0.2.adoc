@@ -1,0 +1,6 @@
+= v3.0.2
+
+.Changes compared to previous version
+
+* GH action: bake-action upgrade docker/bake-action@v4 -> docker/bake-action@v5
+
