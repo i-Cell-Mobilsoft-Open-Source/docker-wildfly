@@ -1,0 +1,5 @@
+= v2.0.1
+
+.What's new
+* ironjacamar auto commit disabled when stopping container
+* Set the default garbage collector to g1 gc.  With JAVA_GC environment variable the default gc can be overridden. Just set JAVA_GC env variable in docker-compose file. Correct values: '-XX:+UseConcMarkSweepGC' ; '-XX:+UseSerialGC' ; '-XX:+UseG1GC' etc

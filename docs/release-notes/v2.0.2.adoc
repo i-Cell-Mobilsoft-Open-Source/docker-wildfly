@@ -1,0 +1,5 @@
+= v2.0.2
+
+.What's new
+
+* GH action: bake-action upgrade docker/bake-action@v4 -> docker/bake-action@v5
