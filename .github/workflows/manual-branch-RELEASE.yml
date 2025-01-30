@@ -107,7 +107,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: docker buildx bake "#1"
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         with:
           set: |
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
@@ -116,7 +116,7 @@ jobs:
             docker-compose-1.yml
           targets: wildfly-ms-release,wildfly-jpa-release,wildfly-full-release
       - name: docker buildx bake "#2"
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         with:
           set: |
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
@@ -125,7 +125,7 @@ jobs:
             docker-compose-2.yml
           targets: wildfly-ms-microprofile-release,wildfly-ms-jpa-microprofile-release,wildfly-full-microprofile-release
       - name: docker buildx bake "#3"
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         with:
           set: |
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
@@ -134,7 +134,7 @@ jobs:
             docker-compose-3.yml
           targets: wildfly-mp-jpa-oracle-jdbc-release,wildfly-mp-full-oracle-jdbc-release,wildfly-mp-jpa-postgresql-jdbc-release,wildfly-mp-full-postgresql-jdbc-release,wildfly-mp-jpa-mariadb-jdbc-release,wildfly-mp-full-mariadb-jdbc-release,
       - name: docker buildx bake "#4"
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         with:
           set: |
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
