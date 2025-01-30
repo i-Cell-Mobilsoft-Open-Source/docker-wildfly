@@ -16,4 +16,6 @@ include::examples.adoc[leveloffset=+1]
 
 == Release Notes
 include::release-notes/v2.0.0.adoc[leveloffset=+2]
+include::release-notes/v2.0.1.adoc[leveloffset=+2]
+include::release-notes/v2.0.2.adoc[leveloffset=+2]
 
