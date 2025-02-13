@@ -10,7 +10,7 @@ set formatterZoneId=\${env.CONSOLE_LOGGING_JSON_FORMATTER_ZONEID,console.logging
 /subsystem=logging/console-handler=CONSOLE_JSON:undefine-attribute(name=level)
 /subsystem=logging/console-handler=CONSOLE_JSON:write-attribute(name=enabled, value=$consoleLoggingJsonEnabled)
 
-/subsystem=logging/json-formatter=JSON_FORMATTER:add(exception-output-type=formatted, pretty-print=false, zone-id=$formatterZoneId)
+/subsystem=logging/json-formatter=JSON_FORMATTER:add(exception-output-type=formatted, pretty-print=false, zone-id=$formatterZoneId, meta-data={moduleId=${env.JSON_MODULE_ID:unknown}, moduleVersion=${env.JSON_MODULE_VERSION:unknown}})
 /subsystem=logging/console-handler=CONSOLE_JSON:write-attribute(name=named-formatter, value=JSON_FORMATTER)
 
 # change root handler
