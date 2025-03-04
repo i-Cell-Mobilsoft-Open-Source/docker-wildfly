@@ -3,14 +3,23 @@
 
 # __don't use__ space at '=' sign!
 set consoleLoggingJsonEnabled=\${env.CONSOLE_LOGGING_JSON_ENABLED,console.logging.json.enabled:false}
-set formatterZoneId=\${env.CONSOLE_LOGGING_JSON_FORMATTER_ZONEID,console.logging.json.formatter.zoneid:UTC}
 
 # log everything to the console at development stage (root logger)
 /subsystem=logging/console-handler=CONSOLE_JSON:add
 /subsystem=logging/console-handler=CONSOLE_JSON:undefine-attribute(name=level)
 /subsystem=logging/console-handler=CONSOLE_JSON:write-attribute(name=enabled, value=$consoleLoggingJsonEnabled)
 
-/subsystem=logging/json-formatter=JSON_FORMATTER:add(exception-output-type=formatted, pretty-print=false, zone-id=$formatterZoneId, meta-data={moduleId=${env.JSON_MODULE_ID:unknown}, moduleVersion=${env.JSON_MODULE_VERSION:unknown}})
+# WildFly JSON Formatter - https://logging.paluch.biz/examples/wildfly-json.html
+/subsystem=logging/custom-formatter=JSON_FORMATTER/:add(module=biz.paluch.logging,class=biz.paluch.logging.gelf.wildfly.WildFlyJsonFormatter,properties={ \
+       version="1.0", \
+       facility="console-json", \
+       extractStackTrace=true, \
+       timestampPattern="yyyy-MM-dd HH:mm:ss,SSSZ", \
+       includeFullMdc=true, \
+       additionalFields="moduleId=${env.JSON_MODULE_ID,json.module.id:unknown},moduleVersion=${env.JSON_MODULE_VERSION,json.module.version:unknown},K8S_NAMESPACE=${env.JSON_K8S_NAMESPACE,json.k8s.namespace:unknown},${env.JSON_MDC_FIELDS,json.mdc.fields:}", \
+       additionalFieldTypes="moduleId=String,moduleVersion=String,K8S_NAMESPACE=String" \
+})
+
 /subsystem=logging/console-handler=CONSOLE_JSON:write-attribute(name=named-formatter, value=JSON_FORMATTER)
 
 # change root handler
