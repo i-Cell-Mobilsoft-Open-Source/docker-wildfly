@@ -4,7 +4,7 @@ ARG ARTIFACT_DOWNLOADER_IMAGE
 ################################################################################
 # Download .jar
 ################################################################################
-FROM $ARTIFACT_DOWNLOADER_IMAGE as download
+FROM $ARTIFACT_DOWNLOADER_IMAGE AS download
 
 ARG POM_GROUP_ID
 ARG POM_ARTIFACT_ID
@@ -23,7 +23,7 @@ RUN $HOME/script/maven-search-download.sh
 ################################################################################
 # Production image
 ################################################################################
-FROM $BASE_IMAGE as prod
+FROM $BASE_IMAGE AS prod
 
 ARG BASE_IMAGE
 ARG POM_GROUP_ID

@@ -7,7 +7,7 @@ ARG ARTIFACT_DOWNLOADER_IMAGE
 ################################################################################
 # Download .jar
 ################################################################################
-FROM $ARTIFACT_DOWNLOADER_IMAGE as download
+FROM $ARTIFACT_DOWNLOADER_IMAGE AS download
 
 ARG POM_GROUP_ID
 ARG POM_ARTIFACT_ID
@@ -26,7 +26,7 @@ RUN $HOME/script/maven-search-download.sh
 ################################################################################
 # galleon image
 ################################################################################
-FROM ${DOCKER_IMAGE_GALLEON} as galleon
+FROM ${DOCKER_IMAGE_GALLEON} AS galleon
 
 ARG GALLEON_LAYERS
 ARG WILDFLY_VERSION
@@ -48,7 +48,7 @@ RUN if [ "$GALLEON_LAYERS" = "full" ] ; then \
 ################################################################################
 # Production image
 ################################################################################
-FROM ${BASE_IMAGE} as prod
+FROM ${BASE_IMAGE} AS prod
 
 ARG BASE_IMAGE
 ARG WILDFLY_VERSION
