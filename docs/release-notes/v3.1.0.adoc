@@ -1,0 +1,15 @@
+= v3.1.0
+
+.Changes compared to previous version
+
+* GH action: bake-action upgrade docker/bake-action@v4 -> docker/bake-action@v5
+* JSON logging enhancements:
+** `biz.paluch.logging.gelf.wildfly.WildFlyJsonFormatter` configured supporting our standard logging format
+*** Environment changes:
+**** (removed) `CONSOLE_LOGGING_JSON_FORMATTER_ZONEID` default `UTC`
+***** with `WildFlyJsonFormatter` there is no option to set the timezone, thus adding zone offset to timestamp: `yyyy-MM-dd HH:mm:ss,SSSZ`
+**** (new) `JSON_MODULE_ID` default `unknown`
+**** (new) `JSON_MODULE_VERSION` default `unknown`
+**** (new) `JSON_K8S_NAMESPACE` default `unknown`
+**** (new) `JSON_MDC_FIELDS`
+
