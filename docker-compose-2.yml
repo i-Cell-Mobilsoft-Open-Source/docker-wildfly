@@ -1,5 +1,3 @@
-version: "3.8"
-
 # START build
 # galleon needs DOCKER_BUILDKIT as well 
 # DOCKER_BUILDKIT=1 docker compose -f docker-compose-2.yml build --no-cache

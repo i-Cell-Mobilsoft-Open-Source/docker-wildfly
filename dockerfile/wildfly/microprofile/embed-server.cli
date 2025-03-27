@@ -34,17 +34,6 @@ end-try
 
 run-batch --file=${TMP_DIR}/embed-server/configure-micrometer.cli
 
-# try remove unsupported metrics
-# https://docs.wildfly.org/30/Admin_Guide.html#MicroProfile_Metrics_SmallRye
-# https://docs.wildfly.org/30/Admin_Guide.html#micrometer-required-extension-metrics
-try
-/subsystem=metrics:remove()
-/extension=org.wildfly.extension.metrics:remove()
-catch
-echo "WildFly Metrics extension already removed."
-finally
-end-try
-
 # add openapi with exception handling
 try
 /extension=org.wildfly.extension.microprofile.openapi-smallrye:add

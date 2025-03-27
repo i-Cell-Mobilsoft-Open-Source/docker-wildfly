@@ -9,7 +9,7 @@ FROM ${BASE_IMAGE} AS prod
 ARG BASE_IMAGE
 
 LABEL base.image=$BASE_IMAGE
-LABEL microprofile.configs=opentrace,metrics,reactive-messaging
+LABEL microprofile.configs=opentrace,reactive-messaging
 LABEL ee.configs=managed-executor
 
 ARG TMP_DIR=$HOME/tmp
