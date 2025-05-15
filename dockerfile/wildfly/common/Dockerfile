@@ -7,7 +7,7 @@ ARG ARTIFACT_DOWNLOADER_IMAGE
 ################################################################################
 # Download .jar
 ################################################################################
-FROM $ARTIFACT_DOWNLOADER_IMAGE as download
+FROM $ARTIFACT_DOWNLOADER_IMAGE AS download
 
 ARG POM_GROUP_ID
 ARG POM_ARTIFACT_ID
@@ -26,14 +26,16 @@ RUN $HOME/script/maven-search-download.sh
 ################################################################################
 # galleon image
 ################################################################################
-FROM ${DOCKER_IMAGE_GALLEON} as galleon
+FROM ${DOCKER_IMAGE_GALLEON} AS galleon
 
 ARG GALLEON_LAYERS
 ARG WILDFLY_VERSION
 ARG WILDFLY_HOME=$HOME/wildfly
 
-RUN --mount=type=cache,target=$GALLEON_HOME/.m2,uid=101,gid=101 \
-        if [ "$GALLEON_LAYERS" = "full" ] ; then \
+#https://github.com/wildfly/galleon/issues/349
+USER $SYSTEM
+
+RUN if [ "$GALLEON_LAYERS" = "full" ] ; then \
             ${GALLEON_HOME}/bin/galleon.sh install wildfly:current#${WILDFLY_VERSION} \
                 --dir=${WILDFLY_HOME} \
                 --verbose; \
@@ -43,11 +45,10 @@ RUN --mount=type=cache,target=$GALLEON_HOME/.m2,uid=101,gid=101 \
                 --dir=${WILDFLY_HOME} \
                 --verbose; \
         fi ;
-
 ################################################################################
 # Production image
 ################################################################################
-FROM ${BASE_IMAGE} as prod
+FROM ${BASE_IMAGE} AS prod
 
 ARG BASE_IMAGE
 ARG WILDFLY_VERSION
@@ -73,7 +74,10 @@ ARG POM_VERSION
 ARG TMP_DIR=$HOME/tmp
 ARG DOWNLOAD_DIR=$HOME/download
 
+
 COPY --from=download --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP ${DOWNLOAD_DIR}/ ${TMP_DIR}/
+
+###TODO logstash is still relevant? 
 COPY --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP dockerfile/script/wildfly-cli/module/logstash.cli $TMP_DIR/module/logstash.cli
 COPY --chown=$SYSTEM_USER:$SYSTEM_USER_GROUP \
     dockerfile/script/wildfly-cli/embed-server/configure-logging.cli \

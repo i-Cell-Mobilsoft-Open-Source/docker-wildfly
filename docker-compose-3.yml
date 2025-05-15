@@ -1,5 +1,3 @@
-version: "3.8"
-
 # start build
 # BUILDKIT_PROGRESS=plain docker compose -f docker-compose-3.yml build --no-cache
 # run something inside the image

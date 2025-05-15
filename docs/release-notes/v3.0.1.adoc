@@ -4,5 +4,3 @@
 
 * Upgrade Oracle JDBC version from `23.3` to `23.4`
 * Separate managed-executor-service (java:jboss/ee/concurrency/executor/grpc) for gRPC threads
-
-
