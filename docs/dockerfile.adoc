@@ -68,6 +68,7 @@ and the wildfly startup CMD.
 include::table/config-keys.start.adoc[]
 include::script/wildfly-cli/embed-server/configure-logging.adoc[]
 include::script/wildfly-cli/embed-server/configure-logging-json.adoc[]
+include::script/wildfly-cli/embed-server/configure-logging-gelf-json.adoc[]
 include::script/wildfly-cli/embed-server/configure-logging-file.adoc[]
 include::script/wildfly-cli/embed-server/configure-logstash.adoc[]
 include::script/wildfly-cli/embed-server/configure-java-gc.adoc[]
