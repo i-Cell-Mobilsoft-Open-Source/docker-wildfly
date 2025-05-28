@@ -1,0 +1,26 @@
+# $ {jbossHomeName}/bin/jboss-cli.sh --connect --file=configure-logging-gelf-json.cli
+# configure logging to Json logs
+
+# __don't use__ space at '=' sign!
+set consoleLoggingGelfJsonEnabled=\${env.CONSOLE_LOGGING_GELF_JSON_ENABLED,console.logging.gelf.json.enabled:false}
+
+# log everything to the console at development stage (root logger)
+/subsystem=logging/console-handler=CONSOLE_GELF_JSON:add
+/subsystem=logging/console-handler=CONSOLE_GELF_JSON:undefine-attribute(name=level)
+/subsystem=logging/console-handler=CONSOLE_GELF_JSON:write-attribute(name=enabled, value=$consoleLoggingGelfJsonEnabled)
+
+# WildFly JSON Formatter - https://logging.paluch.biz/examples/wildfly-json.html
+/subsystem=logging/custom-formatter=GELF_JSON_FORMATTER/:add(module=biz.paluch.logging,class=biz.paluch.logging.gelf.wildfly.WildFlyJsonFormatter,properties={ \
+       version="1.0", \
+       facility="console-gelf-json", \
+       extractStackTrace=true, \
+       timestampPattern="yyyy-MM-dd HH:mm:ss,SSSZ", \
+       includeFullMdc=true, \
+       additionalFields="moduleId=${env.GELF_JSON_MODULE_ID,gelf.json.module.id:unknown},moduleVersion=${env.GELF_JSON_MODULE_VERSION,gelf.json.module.version:unknown},K8S_NAMESPACE=${env.GELF_JSON_K8S_NAMESPACE,gelf.json.k8s.namespace:unknown},${env.GELF_JSON_MDC_FIELDS,gelf.json.mdc.fields:}", \
+       additionalFieldTypes="moduleId=String,moduleVersion=String,K8S_NAMESPACE=String" \
+})
+
+/subsystem=logging/console-handler=CONSOLE_GELF_JSON:write-attribute(name=named-formatter, value=GELF_JSON_FORMATTER)
+
+# change root handler
+/subsystem=logging/root-logger=ROOT:add-handler(name=CONSOLE_GELF_JSON)

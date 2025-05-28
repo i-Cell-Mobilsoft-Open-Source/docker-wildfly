@@ -1,0 +1,19 @@
+= v2.1.1
+
+.What's new
+* JSON logging:
+** Normal WF JSON logging restored:
+*** GELF formatting is removed
+*** can be activated with `CONSOLE_LOGGING_JSON_ENABLED`
+*** Environment variables can be used to set additional fields in the JSON log:
+**** `JSON_MODULE_ID` default `unknown`
+**** `JSON_MODULE_VERSION` default `unknown`
+**** `JSON_K8S_NAMESPACE` default `unknown`
+**** Info: adding additional mdc fields via env is not supported by the formatter meta-data configuration
+** GELF JSON logging separated from normal WF JSON logging:
+*** can be activated with new env: `CONSOLE_LOGGING_GELF_JSON_ENABLED`
+*** Environment changes:
+**** (new) `GELF_JSON_MODULE_ID` default `unknown`
+**** (new) `GELF_JSON_MODULE_VERSION` default `unknown`
+**** (new) `GELF_JSON_K8S_NAMESPACE` default `unknown`
+**** (new) `GELF_JSON_MDC_FIELDS`
