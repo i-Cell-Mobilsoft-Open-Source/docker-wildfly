@@ -1,0 +1,5 @@
+|CONSOLE_LOGGING_GELF_JSON_ENABLED |console.logging.gelf.json.enabled |false | Enable gelf json console logging.
+|GELF_JSON_MODULE_ID |gelf.json.module.id |unknown |Set the gelf json logging additionalFields `moduleId` key value. Preferably pre-set in Dockerfile.
+|GELF_JSON_MODULE_VERSION |gelf.json.module.version |unknown |Set the gelf json logging additionalFields `moduleVersion` key value. Preferably pre-set in Dockerfile.
+|GELF_JSON_K8S_NAMESPACE |gelf.json.k8s.namespace |unknown |Set the gelf json logging additionalFields `K8S_NAMESPACE` key value.
+|GELF_JSON_MDC_FIELDS |gelf.json.mdc.fields |- |Set the gelf json logging additionalFields additional key values.

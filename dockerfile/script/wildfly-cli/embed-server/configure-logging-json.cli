@@ -3,23 +3,19 @@
 
 # __don't use__ space at '=' sign!
 set consoleLoggingJsonEnabled=\${env.CONSOLE_LOGGING_JSON_ENABLED,console.logging.json.enabled:false}
+set formatterZoneId=\${env.CONSOLE_LOGGING_JSON_FORMATTER_ZONEID,console.logging.json.formatter.zoneid:UTC}
+
+# json-formatter meta-data only accepts system properties, so we need to define them
+/system-property=json.module.id:add(value=${env.JSON_MODULE_ID:unknown})
+/system-property=json.module.version:add(value=${env.JSON_MODULE_VERSION:unknown})
+/system-property=json.k8s.namespace:add(value=${env.JSON_K8S_NAMESPACE:unknown})
 
 # log everything to the console at development stage (root logger)
 /subsystem=logging/console-handler=CONSOLE_JSON:add
 /subsystem=logging/console-handler=CONSOLE_JSON:undefine-attribute(name=level)
 /subsystem=logging/console-handler=CONSOLE_JSON:write-attribute(name=enabled, value=$consoleLoggingJsonEnabled)
 
-# WildFly JSON Formatter - https://logging.paluch.biz/examples/wildfly-json.html
-/subsystem=logging/custom-formatter=JSON_FORMATTER/:add(module=biz.paluch.logging,class=biz.paluch.logging.gelf.wildfly.WildFlyJsonFormatter,properties={ \
-       version="1.0", \
-       facility="console-json", \
-       extractStackTrace=true, \
-       timestampPattern="yyyy-MM-dd HH:mm:ss,SSSZ", \
-       includeFullMdc=true, \
-       additionalFields="moduleId=${env.JSON_MODULE_ID,json.module.id:unknown},moduleVersion=${env.JSON_MODULE_VERSION,json.module.version:unknown},K8S_NAMESPACE=${env.JSON_K8S_NAMESPACE,json.k8s.namespace:unknown},${env.JSON_MDC_FIELDS,json.mdc.fields:}", \
-       additionalFieldTypes="moduleId=String,moduleVersion=String,K8S_NAMESPACE=String" \
-})
-
+/subsystem=logging/json-formatter=JSON_FORMATTER:add(exception-output-type=formatted, pretty-print=false, zone-id=$formatterZoneId, meta-data={moduleId=${json.module.id}, moduleVersion=${json.module.version}, K8S_NAMESPACE=${json.k8s.namespace}})
 /subsystem=logging/console-handler=CONSOLE_JSON:write-attribute(name=named-formatter, value=JSON_FORMATTER)
 
 # change root handler
