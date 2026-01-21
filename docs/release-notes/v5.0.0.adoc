@@ -1,0 +1,6 @@
+= v5.0.0
+
+.Changes compared to previous version
+
+* base image upgrade 1.8.0
+* WildFly 38 upgrade
