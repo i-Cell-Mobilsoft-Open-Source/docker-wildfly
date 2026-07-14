@@ -15,7 +15,7 @@ The docker images contain the following components:
 
 * Wildfly: 34.0.x (Jakarta EE10)
 * Java: 21.x
-* Base image version: 1.5.x
+* Base image version: 1.9.x
 ====
 
 .Compatibility
@@ -52,6 +52,7 @@ All you need to know is the following command:
 docker compose -f <PATH>/docker-compose-1.yml build
 docker compose -f <PATH>/docker-compose-2.yml build
 docker compose -f <PATH>/docker-compose-3.yml build
+docker compose -f <PATH>/docker-compose-4.yml build
 ----
 [IMPORTANT]
 ====
