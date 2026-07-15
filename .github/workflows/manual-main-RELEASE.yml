@@ -160,7 +160,7 @@ jobs:
             *.platform=${{ env.DOCKER_BAKE_PLATFORM }}
           push: true
           files: |
-            docker-compose-3.yml
+            docker-compose-4.yml
           targets: wildfly-mp-full-oracle-jdbc-ibm-mq-release
 
 ###############
