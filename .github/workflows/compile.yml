@@ -17,4 +17,4 @@ jobs:
           docker compose -f ./docker-compose-1.yml build --no-cache
           docker compose -f ./docker-compose-2.yml build --no-cache
           docker compose -f ./docker-compose-3.yml build --no-cache
-
+          docker compose -f ./docker-compose-4.yml build --no-cache

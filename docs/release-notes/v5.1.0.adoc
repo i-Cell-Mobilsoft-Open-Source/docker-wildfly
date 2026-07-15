@@ -1,0 +1,13 @@
+= v5.1.0
+
+.Changes compared to previous version
+
+* Base image version upgraded from `1.8.0` to https://i-cell-mobilsoft-open-source.github.io/docker-base/#_v1_9_0[1.9.0].
+Notable changes:
+** base image is upgraded from `debian:12.12-slim` to `debian:12.15-slim`
+** JRE and JDK 21 `21.0.9_10` → `21.0.11_10`
+** galleon upgraded from `6.1.1.Final` → `7.0.8.Final`
+* Removed `git-history` galleon layer from generated WildFly
+
+.Maintenance
+* Extracted `wildfly-mp-full-oracle-jdbc-ibm-mq-release` image from `docker-compose-3.yml` to a new file: `docker-compose-4.yml`
