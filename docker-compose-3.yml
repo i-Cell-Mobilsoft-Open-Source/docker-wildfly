@@ -68,22 +68,6 @@ services:
         POM_VERSION: $POSTGRES_JDBC_POM_VERSION
         POM_EXTENSION: $POSTGRES_JDBC_POM_EXTENSION
     image: $DOCKER_IMAGE_WF_MP_FULL_POSTGRESQL_JDBC
-  # ibm-mq 
-  wildfly-mp-full-oracle-jdbc-ibm-mq-release:
-    build:
-      context: .
-      dockerfile: dockerfile/wildfly/ibm-mq/Dockerfile
-      args:
-        BASE_IMAGE: $DOCKER_IMAGE_WF_MP_FULL_ORACLE_JDBC
-        ARTIFACT_DOWNLOADER_IMAGE: $DOCKER_IMAGE_ARTIFACT_DOWNLOADER
-        POM_GROUP_ID: $IBM_MQ_POM_GROUP_ID
-        POM_ARTIFACT_ID: $IBM_MQ_POM_ARTIFACT_ID
-        POM_VERSION: $IBM_MQ_POM_VERSION
-        POM_EXTENSION: $IBM_MQ_POM_EXTENSION
-    image: $DOCKER_IMAGE_WF_MP_FULL_ORACLE_JDBC_IBM_MQ
-    depends_on:
-      wildfly-mp-full-oracle-jdbc-release: 
-        condition: service_completed_successfully
   # mariadb-jdbc
   wildfly-mp-jpa-mariadb-jdbc-release:
     build:
