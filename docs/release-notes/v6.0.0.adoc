@@ -1,0 +1,7 @@
+= v5.0.0
+
+.Changes compared to the previous version
+
+* base image upgrade 1.8.0 -> https://i-cell-mobilsoft-open-source.github.io/docker-base/#_v2_1_0[2.1.0]
+* https://www.wildfly.org/news/2026/01/16/WildFly-39-is-released/[WildFly 39] upgrade
+* logstash-gelf upgrade 1.14.1 -> https://github.com/mp911de/logstash-gelf/releases[1.15.1]

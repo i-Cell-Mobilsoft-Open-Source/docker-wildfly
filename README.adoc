@@ -13,9 +13,9 @@ The project can be divided into several parts, completing each other.
 ====
 The docker images contain the following components:
 
-* Wildfly: 34.0.x (Jakarta EE10)
+* Wildfly: 39.0.x (Jakarta EE10)
 * Java: 21.x
-* Base image version: 1.9.x
+* Base image version: 2.1.x
 ====
 
 .Compatibility
@@ -28,6 +28,7 @@ The docker images contain the following components:
 |3.0.x                |Jakarta EE 10 |17 |Widlfy 30.0.1.Final
 |4.0.x                |Jakarta EE 10 |21 |Widlfy 34.0.1.Final
 |5.0.x                |Jakarta EE 10 |21 |Widlfy 38.0.1.Final
+|6.0.x                |Jakarta EE 10 |21 |Widlfy 39.0.1.Final
 |===
 
 The repository is a collection of wildfly docker images used in icellmobilsoft,
