@@ -1,0 +1,6 @@
+= v6.0.0
+
+.Changes compared to the previous version
+
+* JRE upgrade 21 -> 25
+* https://www.wildfly.org/news/2026/07/16/WildFly-41-is-released/[WildFly 41] upgrade
