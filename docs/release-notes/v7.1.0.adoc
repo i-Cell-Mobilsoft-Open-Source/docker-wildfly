@@ -1,0 +1,6 @@
+= v7.1.0
+
+.Changes compared to the previous version
+
+* https://i-cell-mobilsoft-open-source.github.io/docker-base/#_v2_3_0[base image] upgrade 2.1.0 -> 2.3.0
+** https://github.com/i-Cell-Mobilsoft-Open-Source/docker-base/pull/112[java upgraded] to address CVE-2026-114938 "java4shell"
